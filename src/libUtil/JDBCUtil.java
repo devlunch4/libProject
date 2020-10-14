@@ -30,13 +30,67 @@ public class JDBCUtil {
 
 	//접속자
 	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	private String user = "PC20";
+	private String user = "hr";
 	private String password = "java";
 
 	private Connection con = null;
 	private PreparedStatement ps = null;
 	private ResultSet rs = null;
 
+	
+	//회원 검색
+	public String selectOneMem(String sql) {
+		Map<String, Object> row = null;
+		String rowstring = null;
+		try {
+			con = DriverManager.getConnection(url, user, password);
+
+			ps = con.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			ResultSetMetaData md = rs.getMetaData();
+
+			int columnCount = md.getColumnCount();
+
+			while (rs.next()) {
+				row = new HashMap<>();
+
+				for (int i = 1; i <= columnCount; i++) {
+					String key = md.getColumnName(i);
+					Object value = rs.getObject(i);
+					row.put(key, value);
+					rowstring = (String) rs.getObject(i);;
+				}
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (Exception e) {
+				}
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (Exception e) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (Exception e) {
+				}
+		}
+		return rowstring;
+		//return row;
+		
+		
+	}
+	//
+	//
+	//
 	//sql에 맞춰서 한줄 가져오기
 	public Map<String, Object> selectOne(String sql) {
 		Map<String, Object> row = null;
