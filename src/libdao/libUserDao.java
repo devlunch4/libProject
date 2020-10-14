@@ -1,5 +1,9 @@
 package libdao;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import libUtil.JDBCUtil;
 
 public class libUserDao {
@@ -16,14 +20,23 @@ public class libUserDao {
 		}
 		return instance;
 	}
-//스태틱 확인
-	private static JDBCUtil jdbc = JDBCUtil.getInstance();
 
-	public static String selectMemUser(String memId) {
-		String sql = "SELECT userno FROM libuser WHERE userno = " + memId;
-		//String param = new String();
-		//param = memId;
-		return jdbc.selectOneMem(sql);
+	private static JDBCUtil jdbc = JDBCUtil.getInstance();
+	
+////스태틱 확인 ##userno 단일 사용시
+//	public static String selectUser(String userno) {
+//	String sql = "SELECT userno FROM libuser WHERE userno = " + userno;
+//		return jdbc.selectOneMem(sql);
+//	}
+
+	// 회원로그인 조회시 사용자 조회
+	public Map<String, Object> selectUser(String userno, Object password) {
+		String sql = "SELECT userno FROM libuser WHERE userno = " + userno;
+//		List<Object> param = new ArrayList<>();
+//		param.add(userno);
+//		param.add(password);
+		// 해당 값 출력을 위해 jdbc 사용
+		return jdbc.selectOne(sql);
 	}
 
 }

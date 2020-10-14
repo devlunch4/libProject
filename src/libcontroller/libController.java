@@ -1,7 +1,10 @@
 package libcontroller;
 
+import java.util.Map;
+
 import libUtil.ScanUtil;
 import libUtil.View;
+import libservice.libBoardService;
 import libservice.libUserService;
 
 public class libController {
@@ -14,7 +17,9 @@ public class libController {
 
 	}
 
-	public static String LoginMemUser;
+	public static Map<String, Object> LoginMemUser;
+	private libUserService libuserService = libUserService.getInstance();
+	private libBoardService libboardService = libBoardService.getInstance();
 
 	private void start() {
 		int view = View.HOME;
@@ -25,8 +30,10 @@ public class libController {
 				// 메인 메뉴 (첫화면)
 				view = home();
 				// 멤버 로그인의 경우
-			case View.MEMBERLOGIN:
-				view = libUserService.memlogin();
+			case View.USERLOGIN:
+				view = libuserService.userlogin();
+				System.out.println("확인2" + LoginMemUser);
+				break;
 			}
 		}
 	}
@@ -40,12 +47,18 @@ public class libController {
 		int input = ScanUtil.nextInt();
 		switch (input) {
 		case 1:
-			return View.MEMBERLOGIN;
-		default:
+			return View.USERLOGIN;
+		case 2:
+			return View.ADMINLOGIN;
+		case 0:
+			System.out.println("프로그램이 종료되었습니다.");
+			System.exit(0);
 			break;
+		default:
+			System.out.println("잘못된 입력, 아래 메뉴 확인후 올바르게 입력해주세요");
 		}
 
-		return 0;
+		return View.HOME;
 	}
 
 }

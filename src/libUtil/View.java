@@ -7,7 +7,7 @@ public class View {
 	//첫메인화면
 	public static final int HOME = 0;
 	//회원로그인
-	public static final int MEMBERLOGIN = 1;
+	public static final int USERLOGIN= 1;
 	//관리자로그인
 	public static final int ADMINLOGIN = 2;
 	//
