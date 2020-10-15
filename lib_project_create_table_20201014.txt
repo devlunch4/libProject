@@ -32,9 +32,9 @@ ALTER TABLE LIBADMIN
 CREATE TABLE LIBUSER (
 	userno VARCHAR2(100) NOT NULL, /* 회원번호 */
 	uname VARCHAR2(100) NOT NULL, /* 회원이름 */
-	ubirth DATE, /* 생년월일 */
+	ubirth DATE NOT NULL, /* 생년월일 */
 	uaddress VARCHAR2(255), /* 주소 */
-	uphone NUMBER, /* 전화번호 */
+	uphone VARCHAR2(30), /* 전화번호 */
 	uadddate DATE, /* 생성일 */
 	adminid VARCHAR2(100) /* 관리자계정 */
 );
@@ -75,7 +75,7 @@ CREATE TABLE LIBBOOKINFO (
 	publisher VARCHAR2(100), /* 출판사 */
 	pdate DATE, /* 출간일 */
 	adminid VARCHAR2(100), /* 관리자계정 */
-	rentyesno NUMBER(1) /* 대여여부 */
+	rentyesno NUMBER(1) NOT NULL /* 대여여부 */
 );
 
 COMMENT ON TABLE LIBBOOKINFO IS '책정보';
@@ -111,9 +111,9 @@ CREATE TABLE LIBBOARD (
 	boardno NUMBER NOT NULL, /* 공지번호 */
 	btitle VARCHAR2(255) NOT NULL, /* 공지제목 */
 	bcontent VARCHAR2(255), /* 공지내용 */
-	boardwirter VARCHAR2(100), /* 작성자 */
+	boardwirter VARCHAR2(100) NOT NULL, /* 작성자 */
 	boarddate DATE, /* 작성일 */
-	adminid VARCHAR2(100) /* 관리자계정 */
+	adminid VARCHAR2(100) NOT NULL /* 관리자계정 */
 );
 
 COMMENT ON TABLE LIBBOARD IS '게시판';
@@ -146,7 +146,7 @@ ALTER TABLE LIBBOARD
 CREATE TABLE LIBAPPLYBOARD (
 	findno NUMBER NOT NULL, /* 신청번호 */
 	findcontext VARCHAR2(255), /* 신청도서정보 */
-	userno VARCHAR2(100), /* 회원번호 */
+	userno VARCHAR2(100) NOT NULL, /* 회원번호 */
 	finddate DATE, /* 신청일 */
 	recomm NUMBER, /* 추천 */
 	arrange NUMBER(1) /* 입고완료 */
@@ -181,7 +181,7 @@ ALTER TABLE LIBAPPLYBOARD
 /* 대여내역 */
 CREATE TABLE LIBHISTORY (
 	historyno NUMBER NOT NULL, /* 내역번호 */
-	userno VARCHAR2(100), /* 회원번호 */
+	userno VARCHAR2(100) NOT NULL, /* 회원번호 */
 	bookno NUMBER(13), /* ISBN번호 */
 	rentdate DATE, /* 대여일 */
 	returndate DATE, /* 반납일 */
