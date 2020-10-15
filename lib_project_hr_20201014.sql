@@ -14,3 +14,5 @@ commit;
 
 --타입조회
 DESC libuser;
+--회원 확인조회
+SELECT * FROM libuser WHERE userno = 12345678900;

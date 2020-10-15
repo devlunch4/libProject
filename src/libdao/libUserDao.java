@@ -1,10 +1,10 @@
 package libdao;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import libUtil.JDBCUtil;
+import libUtil.ScanUtil;
+import libcontroller.libController;
 
 public class libUserDao {
 
@@ -21,22 +21,48 @@ public class libUserDao {
 		return instance;
 	}
 
+	// jdbc 호출
 	private static JDBCUtil jdbc = JDBCUtil.getInstance();
-	
-////스태틱 확인 ##userno 단일 사용시
-//	public static String selectUser(String userno) {
-//	String sql = "SELECT userno FROM libuser WHERE userno = " + userno;
-//		return jdbc.selectOneMem(sql);
-//	}
 
-	// 회원로그인 조회시 사용자 조회
+	// 회원로그인 조회시 회원테이블값 일치 확인 조회
 	public Map<String, Object> selectUser(String userno, Object password) {
 		String sql = "SELECT userno FROM libuser WHERE userno = " + userno;
-//		List<Object> param = new ArrayList<>();
-//		param.add(userno);
-//		param.add(password);
-		// 해당 값 출력을 위해 jdbc 사용
 		return jdbc.selectOne(sql);
 	}
 
+	// 로그인한 회원의 정보 출력 FROM libuserservice.userEdit() 이전메소드의 회원정보 출력 다음
+	// 수정을 위해 실행되는 메소드
+	public int userModify() {
+		System.out.println("===수정 가능한 항목 선택");
+		System.out.println("1.주소 \t2.전화번호 \t0.이전메뉴돌아가기");
+		int minput = ScanUtil.nextInt();
+		String msql = null;
+		String sql = null;
+		Object muserno = libController.Loginuserno.get("USERNO");
+		switch (minput) {
+		case 1:// 주소변경
+			System.out.println("변경할 주소 내용 입력해주세요>>");
+			msql = ScanUtil.nextLine();
+			sql = "UPDATE libuser SET uaddress = '" + msql
+					+ "' WHERE userno = '" + muserno + "'";
+			return jdbc.update(sql);
+
+		case 2:
+			System.out.println("변경할 전화번호를 입력해주세요>>");
+			msql = ScanUtil.nextLine();
+			sql = "UPDATE libuser SET uphone = '" + msql + "' WHERE userno = '"
+					+ muserno + "'";
+			return jdbc.update(sql);
+
+		case 0:
+			break;
+
+		default:
+			break;
+		}
+		//
+		//
+		return 0;
+
+	}
 }
