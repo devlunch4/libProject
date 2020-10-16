@@ -1,20 +1,20 @@
-/* ê´€ë¦¬ìž */
+/* °ü¸®ÀÚ */
 CREATE TABLE LIBADMIN (
-	adminid VARCHAR2(100) NOT NULL, /* ê´€ë¦¬ìžê³„ì • */
-	adminpw VARCHAR2(100) NOT NULL, /* ê´€ë¦¬ìžë¹„ë°€ë²ˆí˜¸ */
-	adminnm VARCHAR2(100), /* ê´€ë¦¬ìžì´ë¦„ */
-	adddate DATE /* ìƒì„±ì¼ */
+	adminid VARCHAR2(100) NOT NULL, /* °ü¸®ÀÚ°èÁ¤ */
+	adminpw VARCHAR2(100) NOT NULL, /* °ü¸®ÀÚºñ¹Ð¹øÈ£ */
+	adminnm VARCHAR2(100), /* °ü¸®ÀÚÀÌ¸§ */
+	adddate DATE /* »ý¼ºÀÏ */
 );
 
-COMMENT ON TABLE LIBADMIN IS 'ê´€ë¦¬ìž';
+COMMENT ON TABLE LIBADMIN IS '°ü¸®ÀÚ';
 
-COMMENT ON COLUMN LIBADMIN.adminid IS 'ê´€ë¦¬ìžê³„ì •';
+COMMENT ON COLUMN LIBADMIN.adminid IS '°ü¸®ÀÚ°èÁ¤';
 
-COMMENT ON COLUMN LIBADMIN.adminpw IS 'ê´€ë¦¬ìžë¹„ë°€ë²ˆí˜¸';
+COMMENT ON COLUMN LIBADMIN.adminpw IS '°ü¸®ÀÚºñ¹Ð¹øÈ£';
 
-COMMENT ON COLUMN LIBADMIN.adminnm IS 'ê´€ë¦¬ìžì´ë¦„';
+COMMENT ON COLUMN LIBADMIN.adminnm IS '°ü¸®ÀÚÀÌ¸§';
 
-COMMENT ON COLUMN LIBADMIN.adddate IS 'ìƒì„±ì¼';
+COMMENT ON COLUMN LIBADMIN.adddate IS '»ý¼ºÀÏ';
 
 CREATE UNIQUE INDEX PK_LIBADMIN
 	ON LIBADMIN (
@@ -28,32 +28,32 @@ ALTER TABLE LIBADMIN
 			adminid
 		);
 
-/* íšŒì› */
+/* È¸¿ø */
 CREATE TABLE LIBUSER (
-	userno VARCHAR2(100) NOT NULL, /* íšŒì›ë²ˆí˜¸ */
-	uname VARCHAR2(100) NOT NULL, /* íšŒì›ì´ë¦„ */
-	ubirth DATE NOT NULL, /* ìƒë…„ì›”ì¼ */
-	uaddress VARCHAR2(255), /* ì£¼ì†Œ */
-	uphone VARCHAR2(30), /* ì „í™”ë²ˆí˜¸ */
-	uadddate DATE, /* ìƒì„±ì¼ */
-	adminid VARCHAR2(100) /* ê´€ë¦¬ìžê³„ì • */
+	userno VARCHAR2(100) NOT NULL, /* È¸¿ø¹øÈ£ */
+	uname VARCHAR2(100) NOT NULL, /* È¸¿øÀÌ¸§ */
+	ubirth DATE NOT NULL, /* »ý³â¿ùÀÏ */
+	uaddress VARCHAR2(255), /* ÁÖ¼Ò */
+	uphone VARCHAR2(30), /* ÀüÈ­¹øÈ£ */
+	uadddate DATE, /* »ý¼ºÀÏ */
+	adminid VARCHAR2(100) /* °ü¸®ÀÚ°èÁ¤ */
 );
 
-COMMENT ON TABLE LIBUSER IS 'íšŒì›';
+COMMENT ON TABLE LIBUSER IS 'È¸¿ø';
 
-COMMENT ON COLUMN LIBUSER.userno IS 'íšŒì›ë²ˆí˜¸';
+COMMENT ON COLUMN LIBUSER.userno IS 'È¸¿ø¹øÈ£';
 
-COMMENT ON COLUMN LIBUSER.uname IS 'íšŒì›ì´ë¦„';
+COMMENT ON COLUMN LIBUSER.uname IS 'È¸¿øÀÌ¸§';
 
-COMMENT ON COLUMN LIBUSER.ubirth IS 'ìƒë…„ì›”ì¼';
+COMMENT ON COLUMN LIBUSER.ubirth IS '»ý³â¿ùÀÏ';
 
-COMMENT ON COLUMN LIBUSER.uaddress IS 'ì£¼ì†Œ';
+COMMENT ON COLUMN LIBUSER.uaddress IS 'ÁÖ¼Ò';
 
-COMMENT ON COLUMN LIBUSER.uphone IS 'ì „í™”ë²ˆí˜¸';
+COMMENT ON COLUMN LIBUSER.uphone IS 'ÀüÈ­¹øÈ£';
 
-COMMENT ON COLUMN LIBUSER.uadddate IS 'ìƒì„±ì¼';
+COMMENT ON COLUMN LIBUSER.uadddate IS '»ý¼ºÀÏ';
 
-COMMENT ON COLUMN LIBUSER.adminid IS 'ê´€ë¦¬ìžê³„ì •';
+COMMENT ON COLUMN LIBUSER.adminid IS '°ü¸®ÀÚ°èÁ¤';
 
 CREATE UNIQUE INDEX PK_LIBUSER
 	ON LIBUSER (
@@ -67,32 +67,35 @@ ALTER TABLE LIBUSER
 			userno
 		);
 
-/* ì±…ì •ë³´ */
+/* Ã¥Á¤º¸ */
 CREATE TABLE LIBBOOKINFO (
-	bookno NUMBER(13) NOT NULL, /* ISBNë²ˆí˜¸ */
-	title VARCHAR2(255), /* ì œëª© */
-	author VARCHAR2(100), /* ì €ìž */
-	publisher VARCHAR2(100), /* ì¶œíŒì‚¬ */
-	pdate DATE, /* ì¶œê°„ì¼ */
-	adminid VARCHAR2(100), /* ê´€ë¦¬ìžê³„ì • */
-	rentyesno NUMBER(1) NOT NULL /* ëŒ€ì—¬ì—¬ë¶€ */
+	bookno NUMBER(13) NOT NULL, /* ISBN¹øÈ£ */
+	title VARCHAR2(255), /* Á¦¸ñ */
+	author VARCHAR2(100), /* ÀúÀÚ */
+	publisher VARCHAR2(100), /* ÃâÆÇ»ç */
+	pdate DATE, /* Ãâ°£ÀÏ */
+	adminid VARCHAR2(100), /* °ü¸®ÀÚ°èÁ¤ */
+	rentyesno NUMBER(1) NOT NULL, /* ´ë¿©¿©ºÎ */
+	addbkdate DATE /* µµ¼­µî·ÏÀÏ */
 );
 
-COMMENT ON TABLE LIBBOOKINFO IS 'ì±…ì •ë³´';
+COMMENT ON TABLE LIBBOOKINFO IS 'Ã¥Á¤º¸';
 
-COMMENT ON COLUMN LIBBOOKINFO.bookno IS 'ISBNë²ˆí˜¸';
+COMMENT ON COLUMN LIBBOOKINFO.bookno IS 'ISBN¹øÈ£';
 
-COMMENT ON COLUMN LIBBOOKINFO.title IS 'ì œëª©';
+COMMENT ON COLUMN LIBBOOKINFO.title IS 'Á¦¸ñ';
 
-COMMENT ON COLUMN LIBBOOKINFO.author IS 'ì €ìž';
+COMMENT ON COLUMN LIBBOOKINFO.author IS 'ÀúÀÚ';
 
-COMMENT ON COLUMN LIBBOOKINFO.publisher IS 'ì¶œíŒì‚¬';
+COMMENT ON COLUMN LIBBOOKINFO.publisher IS 'ÃâÆÇ»ç';
 
-COMMENT ON COLUMN LIBBOOKINFO.pdate IS 'ì¶œê°„ì¼';
+COMMENT ON COLUMN LIBBOOKINFO.pdate IS 'Ãâ°£ÀÏ';
 
-COMMENT ON COLUMN LIBBOOKINFO.adminid IS 'ê´€ë¦¬ìžê³„ì •';
+COMMENT ON COLUMN LIBBOOKINFO.adminid IS '°ü¸®ÀÚ°èÁ¤';
 
-COMMENT ON COLUMN LIBBOOKINFO.rentyesno IS 'ëŒ€ì—¬ì—¬ë¶€';
+COMMENT ON COLUMN LIBBOOKINFO.rentyesno IS '´ë¿©¿©ºÎ';
+
+COMMENT ON COLUMN LIBBOOKINFO.addbkdate IS 'µµ¼­µî·ÏÀÏ';
 
 CREATE UNIQUE INDEX PK_LIBBOOKINFO
 	ON LIBBOOKINFO (
@@ -106,29 +109,29 @@ ALTER TABLE LIBBOOKINFO
 			bookno
 		);
 
-/* ê²Œì‹œíŒ */
+/* °Ô½ÃÆÇ */
 CREATE TABLE LIBBOARD (
-	boardno NUMBER NOT NULL, /* ê³µì§€ë²ˆí˜¸ */
-	btitle VARCHAR2(255) NOT NULL, /* ê³µì§€ì œëª© */
-	bcontent VARCHAR2(255), /* ê³µì§€ë‚´ìš© */
-	bwriter VARCHAR2(100) NOT NULL, /* ìž‘ì„±ìž */
-	bdate DATE, /* ìž‘ì„±ì¼ */
-	adminid VARCHAR2(100) NOT NULL /* ê´€ë¦¬ìžê³„ì • */
+	boardno NUMBER NOT NULL, /* °øÁö¹øÈ£ */
+	btitle VARCHAR2(255) NOT NULL, /* °øÁöÁ¦¸ñ */
+	bcontent VARCHAR2(255), /* °øÁö³»¿ë */
+	bwriter VARCHAR2(100) NOT NULL, /* ÀÛ¼ºÀÚ */
+	bdate DATE, /* ÀÛ¼ºÀÏ */
+	adminid VARCHAR2(100) NOT NULL /* °ü¸®ÀÚ°èÁ¤ */
 );
 
-COMMENT ON TABLE LIBBOARD IS 'ê²Œì‹œíŒ';
+COMMENT ON TABLE LIBBOARD IS '°Ô½ÃÆÇ';
 
-COMMENT ON COLUMN LIBBOARD.boardno IS 'ê³µì§€ë²ˆí˜¸';
+COMMENT ON COLUMN LIBBOARD.boardno IS '°øÁö¹øÈ£';
 
-COMMENT ON COLUMN LIBBOARD.btitle IS 'ê³µì§€ì œëª©';
+COMMENT ON COLUMN LIBBOARD.btitle IS '°øÁöÁ¦¸ñ';
 
-COMMENT ON COLUMN LIBBOARD.bcontent IS 'ê³µì§€ë‚´ìš©';
+COMMENT ON COLUMN LIBBOARD.bcontent IS '°øÁö³»¿ë';
 
-COMMENT ON COLUMN LIBBOARD.bwriter IS 'ìž‘ì„±ìž';
+COMMENT ON COLUMN LIBBOARD.bwriter IS 'ÀÛ¼ºÀÚ';
 
-COMMENT ON COLUMN LIBBOARD.bdate IS 'ìž‘ì„±ì¼';
+COMMENT ON COLUMN LIBBOARD.bdate IS 'ÀÛ¼ºÀÏ';
 
-COMMENT ON COLUMN LIBBOARD.adminid IS 'ê´€ë¦¬ìžê³„ì •';
+COMMENT ON COLUMN LIBBOARD.adminid IS '°ü¸®ÀÚ°èÁ¤';
 
 CREATE UNIQUE INDEX PK_LIBBOARD
 	ON LIBBOARD (
@@ -142,29 +145,29 @@ ALTER TABLE LIBBOARD
 			boardno
 		);
 
-/* ë„ì„œì‹ ì²­ê²Œì‹œíŒ */
+/* µµ¼­½ÅÃ»°Ô½ÃÆÇ */
 CREATE TABLE LIBAPPLYBOARD (
-	findno NUMBER NOT NULL, /* ì‹ ì²­ë²ˆí˜¸ */
-	findcontext VARCHAR2(255), /* ì‹ ì²­ë„ì„œì •ë³´ */
-	userno VARCHAR2(100) NOT NULL, /* íšŒì›ë²ˆí˜¸ */
-	finddate DATE, /* ì‹ ì²­ì¼ */
-	recomm NUMBER, /* ì¶”ì²œ */
-	arrange NUMBER(1) /* ìž…ê³ ì™„ë£Œ */
+	findno NUMBER NOT NULL, /* ½ÅÃ»¹øÈ£ */
+	findcontext VARCHAR2(255), /* ½ÅÃ»µµ¼­Á¤º¸ */
+	userno VARCHAR2(100) NOT NULL, /* È¸¿ø¹øÈ£ */
+	finddate DATE, /* ½ÅÃ»ÀÏ */
+	recomm NUMBER, /* ÃßÃµ */
+	arrange NUMBER(1) /* ÀÔ°í¿Ï·á */
 );
 
-COMMENT ON TABLE LIBAPPLYBOARD IS 'ë„ì„œì‹ ì²­ê²Œì‹œíŒ';
+COMMENT ON TABLE LIBAPPLYBOARD IS 'µµ¼­½ÅÃ»°Ô½ÃÆÇ';
 
-COMMENT ON COLUMN LIBAPPLYBOARD.findno IS 'ì‹ ì²­ë²ˆí˜¸';
+COMMENT ON COLUMN LIBAPPLYBOARD.findno IS '½ÅÃ»¹øÈ£';
 
-COMMENT ON COLUMN LIBAPPLYBOARD.findcontext IS 'ì‹ ì²­ë„ì„œì •ë³´';
+COMMENT ON COLUMN LIBAPPLYBOARD.findcontext IS '½ÅÃ»µµ¼­Á¤º¸';
 
-COMMENT ON COLUMN LIBAPPLYBOARD.userno IS 'íšŒì›ë²ˆí˜¸';
+COMMENT ON COLUMN LIBAPPLYBOARD.userno IS 'È¸¿ø¹øÈ£';
 
-COMMENT ON COLUMN LIBAPPLYBOARD.finddate IS 'ì‹ ì²­ì¼';
+COMMENT ON COLUMN LIBAPPLYBOARD.finddate IS '½ÅÃ»ÀÏ';
 
-COMMENT ON COLUMN LIBAPPLYBOARD.recomm IS 'ì¶”ì²œ';
+COMMENT ON COLUMN LIBAPPLYBOARD.recomm IS 'ÃßÃµ';
 
-COMMENT ON COLUMN LIBAPPLYBOARD.arrange IS 'ìž…ê³ ì™„ë£Œ';
+COMMENT ON COLUMN LIBAPPLYBOARD.arrange IS 'ÀÔ°í¿Ï·á';
 
 CREATE UNIQUE INDEX PK_LIBAPPLYBOARD
 	ON LIBAPPLYBOARD (
@@ -178,32 +181,32 @@ ALTER TABLE LIBAPPLYBOARD
 			findno
 		);
 
-/* ëŒ€ì—¬ë‚´ì—­ */
+/* ´ë¿©³»¿ª */
 CREATE TABLE LIBHISTORY (
-	historyno NUMBER NOT NULL, /* ë‚´ì—­ë²ˆí˜¸ */
-	userno VARCHAR2(100) NOT NULL, /* íšŒì›ë²ˆí˜¸ */
-	bookno NUMBER(13), /* ISBNë²ˆí˜¸ */
-	rentdate DATE, /* ëŒ€ì—¬ì¼ */
-	returndate DATE, /* ë°˜ë‚©ì¼ */
-	expectdate DATE, /* ë°˜ë‚©ì˜ˆìƒì¼ */
-	extencan NUMBER(1) /* ì—°ìž¥ê°€ëŠ¥ìœ ë¬´ */
+	historyno NUMBER NOT NULL, /* ³»¿ª¹øÈ£ */
+	userno VARCHAR2(100) NOT NULL, /* È¸¿ø¹øÈ£ */
+	bookno NUMBER(13), /* ISBN¹øÈ£ */
+	rentdate DATE, /* ´ë¿©ÀÏ */
+	returndate DATE, /* ¹Ý³³ÀÏ */
+	expectdate DATE, /* ¹Ý³³¿¹»óÀÏ */
+	extencan NUMBER(1) /* ¿¬Àå°¡´ÉÀ¯¹« */
 );
 
-COMMENT ON TABLE LIBHISTORY IS 'ëŒ€ì—¬ë‚´ì—­';
+COMMENT ON TABLE LIBHISTORY IS '´ë¿©³»¿ª';
 
-COMMENT ON COLUMN LIBHISTORY.historyno IS 'ë‚´ì—­ë²ˆí˜¸';
+COMMENT ON COLUMN LIBHISTORY.historyno IS '³»¿ª¹øÈ£';
 
-COMMENT ON COLUMN LIBHISTORY.userno IS 'íšŒì›ë²ˆí˜¸';
+COMMENT ON COLUMN LIBHISTORY.userno IS 'È¸¿ø¹øÈ£';
 
-COMMENT ON COLUMN LIBHISTORY.bookno IS 'ISBNë²ˆí˜¸';
+COMMENT ON COLUMN LIBHISTORY.bookno IS 'ISBN¹øÈ£';
 
-COMMENT ON COLUMN LIBHISTORY.rentdate IS 'ëŒ€ì—¬ì¼';
+COMMENT ON COLUMN LIBHISTORY.rentdate IS '´ë¿©ÀÏ';
 
-COMMENT ON COLUMN LIBHISTORY.returndate IS 'ë°˜ë‚©ì¼';
+COMMENT ON COLUMN LIBHISTORY.returndate IS '¹Ý³³ÀÏ';
 
-COMMENT ON COLUMN LIBHISTORY.expectdate IS 'ë°˜ë‚©ì˜ˆìƒì¼';
+COMMENT ON COLUMN LIBHISTORY.expectdate IS '¹Ý³³¿¹»óÀÏ';
 
-COMMENT ON COLUMN LIBHISTORY.extencan IS 'ì—°ìž¥ê°€ëŠ¥ìœ ë¬´';
+COMMENT ON COLUMN LIBHISTORY.extencan IS '¿¬Àå°¡´ÉÀ¯¹«';
 
 CREATE UNIQUE INDEX PK_LIBHISTORY
 	ON LIBHISTORY (

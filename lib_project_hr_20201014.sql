@@ -12,6 +12,7 @@ commit;
 --1관리자 테이블
 --관리자 추가 필수
 INSERT INTO LIBADMIN VALUES ('ADMIN', 'ADMIN', '관리자이름', SYSDATE);
+SELECT * FROM LIBADMIN;
 
 
 --2회원테이블
@@ -25,8 +26,8 @@ DELETE LIBUSER;
 
 --3도서정보
 --도서정보추가 isbn 10자리로
-INSERT INTO libbookinfo VALUES(1111112345,'제목1','저자1','출판사1',SYSDATE,'ADMIN',0);
-INSERT INTO libbookinfo VALUES(2222212345,'제목2','저자2','출판사2',SYSDATE,'ADMIN',1); --대여중
+INSERT INTO libbookinfo VALUES(1111112345,'제목1','저자1','출판사1',SYSDATE,'ADMIN',0,SYSDATE);
+INSERT INTO libbookinfo VALUES(2222212345,'제목2','저자2','출판사2',SYSDATE,'ADMIN',1,SYSDATE); --대여중
 --도서조회
 SELECT * FROM libbookinfo;
 
@@ -60,6 +61,9 @@ INSERT INTO libapplyboard VALUES(1,'도서신청글1','1234567891',SYSDATE, 0,0)
 INSERT INTO libapplyboard VALUES(2,'도서신청글2','1234567891',SYSDATE, 0,0);
 SELECT * FROM libapplyboard;
 
+DELETE libapplyboard;
+
+commit;
 
 
 --타입조회

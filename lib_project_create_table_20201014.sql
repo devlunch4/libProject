@@ -75,7 +75,8 @@ CREATE TABLE LIBBOOKINFO (
 	publisher VARCHAR2(100), /* 출판사 */
 	pdate DATE, /* 출간일 */
 	adminid VARCHAR2(100), /* 관리자계정 */
-	rentyesno NUMBER(1) NOT NULL /* 대여여부 */
+	rentyesno NUMBER(1) NOT NULL, /* 대여여부 */
+	addbkdate DATE /* 도서등록일 */
 );
 
 COMMENT ON TABLE LIBBOOKINFO IS '책정보';
@@ -93,6 +94,8 @@ COMMENT ON COLUMN LIBBOOKINFO.pdate IS '출간일';
 COMMENT ON COLUMN LIBBOOKINFO.adminid IS '관리자계정';
 
 COMMENT ON COLUMN LIBBOOKINFO.rentyesno IS '대여여부';
+
+COMMENT ON COLUMN LIBBOOKINFO.addbkdate IS '도서등록일';
 
 CREATE UNIQUE INDEX PK_LIBBOOKINFO
 	ON LIBBOOKINFO (
