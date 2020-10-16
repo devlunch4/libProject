@@ -4,11 +4,14 @@ import java.util.Map;
 
 import libUtil.ScanUtil;
 import libUtil.View;
+import libdao.libBoardDao;
+import libdao.libUserDao;
 import libservice.libBoardService;
 import libservice.libUserService;
 
 public class libController {
 	public static Map<String, Object> Loginuserno;
+
 	// 메인메소드
 	public static void main(String[] args) {
 
@@ -17,8 +20,10 @@ public class libController {
 
 	}
 
-		private libUserService libuserService = libUserService.getInstance();
+	private libUserService libuserService = libUserService.getInstance();
 	private libBoardService libboardService = libBoardService.getInstance();
+	private libUserDao libuserDao = libUserDao.getInstance();
+	private libBoardDao libboardDao = libBoardDao.getInstance();
 
 	private void start() {
 		int view = View.HOME;
@@ -45,12 +50,22 @@ public class libController {
 			case View.USERBOOKSEARCH:
 				view = libuserService.userBookSearch();
 				break;
+//회원이 공지글을 읽기위한 메소드				
+			case View.USERREADBOARD:
+				view = libuserService.userReadBoard();
+				break;
 				
-//			case View.APPLYBOARDSHOW:
-//				view = userBookSearch
+			// case View.APPLYBOARDSHOW:
+			// view = userBookSearch
+
+			// case View.USEREDIT:
+			// view = libuserService.userEdit();
+
+			case View.USERBOOKEXT:
+				view = libboardDao.userrent();
+				break;
 				
-//			case View.USEREDIT:
-//				view = libuserService.userEdit();
+				
 			}
 		}
 	}
@@ -59,23 +74,23 @@ public class libController {
 	private int home() {
 		System.out.println("----------------------------");
 		System.out.println("1.회원로그인 \t2.관리자로그인 \t0.프로그램종료");
-				System.out.println("----------------------------");
+		System.out.println("----------------------------");
 		System.out.println("로그인 종류를 선택해주세요>>");
 		int input = ScanUtil.nextInt();
 		switch (input) {
 		case 1:
-			//회원로그인선택시
+			// 회원로그인선택시
 			return View.USERLOGIN;
 		case 2:
-			//관리자로그인선택시
+			// 관리자로그인선택시
 			return View.ADMINLOGIN;
 		case 0:
-			//프로그램종료 선택시
+			// 프로그램종료 선택시
 			System.out.println("프로그램이 종료되었습니다.");
 			System.exit(0);
 			break;
 		default:
-			//오류 입력시
+			// 오류 입력시
 			System.out.println("잘못된 입력, 항목을 확인해주세요 #오류입력시 상위 잘 실행");
 			break;
 		}

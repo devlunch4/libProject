@@ -14,8 +14,12 @@ public class View {
 	public static final int USERBOOKSEARCH = 3;
 	// 회원의 도서신청 게시판 보기 및 수정
 	public static final int APPLYBOARDSHOW = 4;
-	//
-	public static final int USEREDIT =5;
+	// 회원 정보수정 메뉴
+	public static final int USEREDIT = 5;
+	// 회원 책기간 연장 메소드 전 메뉴 연결
+	public static final int USERBOOKEXT = 6;
+	// 회원 공지글 메소드 호출
+	public static final int USERREADBOARD = 7;
 	//
 	//
 	//
@@ -23,12 +27,12 @@ public class View {
 	//
 
 	// 관리자로그인
-	public static final int ADMINLOGIN = 7;
+	public static final int ADMINLOGIN = 8;
 	//
-	public static final int BOARD_LIST = 8;
+	public static final int BOARD_LIST = 9;
 	//
-	public static final int BOARD_VIEW = 9;
+	public static final int BOARD_VIEW = 10;
 	//
-	public static final int BOARD_INSERT_FORM = 10;
+	public static final int BOARD_INSERT_FORM = 11;
 
 }

@@ -9,13 +9,14 @@ import libUtil.View;
 import libcontroller.libController;
 
 public class libUserService {
+	// 외부인스턴스 호출
+	private libUserDao libuserDao = libUserDao.getInstance();
 
 	private libUserService() {
 	}
 
 	// 인스턴스 생성
 	private static libUserService instance;
-	private libUserDao libuserDao = libUserDao.getInstance();
 
 	public static libUserService getInstance() {
 		if (instance == null) {
@@ -59,7 +60,7 @@ public class libUserService {
 
 	// 회원로그인후 회원전용메뉴 진입
 	public int userMenu() {
-		System.out.println("===회원 메인 메뉴 입니다 view.USERMENU");
+		System.out.println("===회원 메인 메뉴");
 		System.out.println("1.도서검색 \t2.회원정보수정및대여연장 \t3.공지글조회 \t0.로그아웃");
 		int input = ScanUtil.nextInt();
 
@@ -77,8 +78,9 @@ public class libUserService {
 			// return View.USEREDIT;
 			break;
 
-		case 3: // 3.회원정보수정
+		case 3: // 3.공지글조회
 			System.out.println("3번 공지글조회을 선택했습니다");
+			userReadBoard();
 			// return View.USERSELECTA;
 			break;
 
@@ -92,6 +94,24 @@ public class libUserService {
 		return View.USERMENU;
 	}
 
+	//회원 로그인후 3번 입력 후 이동된 공지글 조회
+	public int userReadBoard() {
+		//공지글 출력
+		//공지번호,제목,작성자,작성일 조회
+		//제목의 경우 글자수10 제한, 내용의경우 글자수10제한 표현
+		
+		//보드서비스로 넘기기 = 게시공지글 출력 최근 3건만 출력
+		libboardService.readNoticeboard();
+		
+		//조회된 게시글 중 선택된 게시글 번호의 내용 보기
+		libboardService.readNBCon();
+		
+		
+		return View.USERREADBOARD;
+		
+	}
+
+	//회원 로그인후 2번 입력 후 이동된 회원정보수정및도서연장 메인 메소드
 	public int userEdit() {
 		System.out.println("===1-2회원정보수정 메뉴");
 		System.out.println("1.내정보수정 \t2.도서연장 \t0.이전메뉴");
@@ -99,19 +119,24 @@ public class libUserService {
 
 		int edinput = ScanUtil.nextInt();
 		switch (edinput) {
-		case 1://정보수정
-			//내정보 출력 후
+		case 1:// 정보수정
+				// 내정보 출력 후
 			libboardDao.userInfo();
-			
-			//수정할 사항 선택 및 수정 이전화면 가기
+
+			// 수정할 사항 선택 및 수정 이전화면 가기
 			libuserDao.userModify();
-			
+
 			System.out.println("회원정보가 수정되었습니다.");
-			
-			//출력할 컬럼값 선택후 변경
+
+			// 출력할 컬럼값 선택후 변경
 
 			break;
-		case 2:
+		case 2: // 도서연장
+			// 내가 대출중인 도서 출력
+			libboardDao.userrent();
+			// 위 메소드 내부에 아래 메소드 추가
+			// 도서 반납기간 연장 메소드는 libboardDao.userrent() >>> libuserDao 클래스에 있음
+			// libuserDao.userbookext();
 
 			break;
 		case 0:

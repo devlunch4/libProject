@@ -1,5 +1,8 @@
 package libservice;
 
+import java.util.List;
+import java.util.Map;
+
 import libUtil.ScanUtil;
 import libUtil.View;
 import libdao.libBoardDao;
@@ -68,5 +71,38 @@ public class libBoardService {
 		}
 		// 도서검색으로 이동
 		return View.USERBOOKSEARCH;
+	}
+
+	// 신청일
+	// 공지글 출력 3개까지
+	public int readNoticeboard() {
+		// 공지게시글 리스트로 추출 공지글은 무조건 3개 이상 존재하고있음.
+		List<Map<String, Object>> readNoticeList = libboardDao.selectNoticeU();
+
+		System.out.println("===최근 공지 게시글 3건만 보여집니다. ");
+		System.out.println("공지번호\t공지제목\t\t\t공지내용\t\t\t공지작성자\t공지게시일");
+		for (int i = 0; i < 3; i++) {
+			System.out.print(readNoticeList.get(i).get("BOARDNO"));
+			System.out.print("\t" + readNoticeList.get(i).get("BTITLE"));
+			System.out.print("\t\t" + readNoticeList.get(i).get("BCONTENT"));
+			System.out.print("\t\t" + readNoticeList.get(i).get("BWRITER"));
+			System.out.println("\t" + readNoticeList.get(i).get("BDATE"));
+
+		}
+
+		return View.USERREADBOARD;
+	}
+
+	// 조회번호를 입력받아 해당 게시글 출력
+	public int readNBCon() {
+		// 조회할 공지게시글 번호 입력 받기
+		System.out.println("내용 확인 할 게시글 번호 입력>");
+		int readNBConno = ScanUtil.nextInt();
+
+		// 입력받은 게시글 출력
+		libboardDao.readNBone(readNBConno);
+
+		return View.USERREADBOARD;
+
 	}
 }

@@ -230,9 +230,9 @@ public class JDBCUtil {
 			con = DriverManager.getConnection(url, user, password);
 			ps = con.prepareStatement(sql);
 
-//			for (int i = 0; i < param.size(); i++) {
-//				ps.setObject(i + 1, param.get(i));
-//			}
+			// for (int i = 0; i < param.size(); i++) {
+			// ps.setObject(i + 1, param.get(i));
+			// }
 
 			rs = ps.executeQuery();
 
@@ -299,6 +299,7 @@ public class JDBCUtil {
 				}
 		}
 		return result;
+
 	}
 
 	public int update(String sql, List<Object> param) {
@@ -335,4 +336,43 @@ public class JDBCUtil {
 		}
 		return result;
 	}
+
+	// 추가분
+	public int historyupdate(String sql) {
+		int result = 0;
+
+		try {
+			con = DriverManager.getConnection(url, user, password);
+
+			ps = con.prepareStatement(sql);
+
+			result = ps.executeUpdate();
+			if (result > 0) {
+				System.err.println("선택한 번호의 도서가 10일 연장되었습니다.");
+			} else {
+				System.err.println("이미 연장된 도서입니다.");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (Exception e) {
+				}
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (Exception e) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (Exception e) {
+				}
+		}
+		return result;
+	}
+
 }
