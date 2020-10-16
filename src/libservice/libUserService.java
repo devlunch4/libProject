@@ -39,7 +39,7 @@ public class libUserService {
 
 		if (user == null) {
 			System.out.println("없는 회원번호입니다.재입력 바랍니다.");
-			// 아래 return View.USERLOGIN; 실행되도록함
+			// 아래 return View.USERMENU; 실행되도록함
 		} else {
 			System.out.println("로그인성공");
 
@@ -52,8 +52,8 @@ public class libUserService {
 			// 회원로그인 완료후 항목 선택 메뉴가 나오도록함 userA 메소드 호출
 			return View.USERMENU;
 		}
-		System.out.println("회원로그인 실패로 메소드 재실행 리턴");
-		return View.USERLOGIN;
+		System.out.println("회원로그인 실패로 첫화면으로 이동합니다.");
+		return View.HOME;
 	}
 
 	// 회원로그인후 회원전용메뉴 진입

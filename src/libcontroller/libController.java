@@ -117,8 +117,8 @@ public class libController {
 			break;
 		default:
 			// 오류 입력시
-			System.out.println("잘못된 입력, 항목을 확인해주세요 #오류입력시 상위 잘 실행");
-			break;
+			System.out.println("잘못된 입력, 재로딩됩니다.");
+			return View.HOME;
 		}
 		return View.HOME;
 	}

@@ -43,21 +43,6 @@ public class libBoardDao {
 	// jdbc 인스턴스 호출
 	private JDBCUtil jdbc = JDBCUtil.getInstance();
 
-	//
-	//
-	//
-	//
-	//
-	// 책정보 호출 ???미사용?
-	// public List<Map<String, Object>> selectbookinfo() {
-	// String sql =
-	// "SELECT bookno, title, author,publisher, pdate,adminid,rentyesno FROM libbookinfo";
-	//
-	// return jdbc.selectList(sql);
-	// }
-
-	//
-	//
 	// 회원메뉴>도서검색 libUservice.userBookSearch() >>> 도서조회 현재 booksearch()
 	public void bookboardsearch() {
 		System.out.println("1.ISBN번호 \t2.제목 \t3.저자 \t4.출판사 \t0.이전화면");
@@ -188,8 +173,8 @@ public class libBoardDao {
 				System.out.print(rs.getInt("findno") + "\t"
 						+ rs.getString("findcontext") + "\t\t\t"
 						+ rs.getString("userno") + "\t"
-						+ rs.getString("finddate") + "\t"
-						+ rs.getInt("recomm") + "\t" + rs.getInt("arrange"));
+						+ rs.getString("finddate") + "\t" + rs.getInt("recomm")
+						+ "\t" + rs.getInt("arrange"));
 				System.out.println("");
 			}
 		} catch (SQLException e) {
@@ -492,6 +477,95 @@ public class libBoardDao {
 		}
 	}
 
-	// 공지 게시글중 번호 입력 받아 추출 및 프린트
+	// 관리자 고고고고
+	// 도서 추가 메소드 바로 시작 insert
+	// 1책번호,2제목,3저자,4출판사,5출간일,6관리자계정,7대여초기 = 0 대여중=1,8도서등록일
+	public void addbook() {
+		System.err.println("1.ISBN번호 10자리를 입력해주세요>>>");
+		String isbnno = ScanUtil.nextLine();
+		System.err.println("2.제목을 입력해주세요>>>");
+		String btitle = ScanUtil.nextLine();
+		System.err.println("3.저자를 입력해주세요>>>");
+		String bwriter = ScanUtil.nextLine();
+		System.err.println("4.출판사를 입력해주세요>>>");
+		String publisher = ScanUtil.nextLine();
+		System.err.println("5.출간일 년월 [YYYYMM] 양식으로 입력해주세요>>> ");
+		String pdate = ScanUtil.nextLine();
+		// 6번 관리자는 자동입력됨.
+		// libController.Loginadminno = admin; 사용
+		Object adminno = libController.Loginadminno.get("ADMINID");
+		// 7번은 지정 초기값 =0
+		// 8번은 도서등록날짜 sql sysdate 사용.
 
+		String addboosql = "INSERT INTO libbookinfo values(" + isbnno + ", '"
+				+ btitle + "', '" + bwriter + "',' " + publisher
+				+ "', TO_DATE('" + pdate + "', 'YYYYMM'), '" + adminno
+				+ "', '0', SYSDATE)";
+
+		try {
+			con = DriverManager.getConnection(url, user, password);
+			ps = con.prepareStatement(addboosql);
+			int result = ps.executeUpdate();
+			if (0 < result) {
+				System.out.println("등록이 완료되었습니다.");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (Exception e) {
+				}
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (Exception e) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (Exception e) {
+				}
+		}
+	}
+
+	public void modbook() {
+		// 도서 수정항목 번호, 제목,저자,출판사,출간일
+		System.out.println("1.ISBN번호\t2.제목\t3.저자\t4.출판사\t5.출간일\t0.이전화면");
+
+		// 수정할 항목번호 입력 받음
+		System.out.println("수정할 항목 번호 입력>>>");
+		int mname = ScanUtil.nextInt();
+		if (mname == 0) {
+			return;
+		} else {
+			System.out.println("변경될 내용 입력>>>");
+		}
+
+		String mvalue = ScanUtil.nextLine();
+
+		String fixname = null;
+		String fixxname = null;
+		switch (mname) {
+		case 1: // isbn번호 수정
+			fixname = "bookno";
+			fixxname = "ISBN번호";
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		case 0:
+			return;
+
+		default:
+			break;
+		}
+
+	}
 }

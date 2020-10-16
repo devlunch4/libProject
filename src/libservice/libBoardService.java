@@ -1,10 +1,12 @@
 package libservice;
 
+import java.sql.DriverManager;
 import java.util.List;
 import java.util.Map;
 
 import libUtil.ScanUtil;
 import libUtil.View;
+import libcontroller.libController;
 import libdao.libBoardDao;
 
 public class libBoardService {
@@ -105,4 +107,9 @@ public class libBoardService {
 		return View.USERREADBOARD;
 
 	}
+
+	
+	// ///////
+	// 관리자 권한 은 아래 메소드들
+
 }

@@ -41,14 +41,14 @@ public class libAdminService {
 		Map<String, Object> admin = libadminDao.selectAdmin(adminid, adminpw);
 
 		if (admin == null) {
-			System.out.println("없는 관리자계정입니다. 재입력 바랍니다.");
+			System.out.println("없는 관리자계정입니다. 재입력바랍니다.");
 		} else {
 			System.out.println("관리자 로그인 성공");
+			// 관리자 정보 저장.
+			libController.Loginadminno = admin;
+			return View.ADMINMENU;
 		}
-		// 관리자 정보 저장.
-		libController.Loginadminno = admin;
-
-		return View.ADMINMENU;
+		return View.HOME;
 	}
 
 	// 관리자 로그인 후 메뉴화면
@@ -97,13 +97,27 @@ public class libAdminService {
 		int inputctrl = ScanUtil.nextInt();
 
 		switch (inputctrl) {
-		case 1://도서 등록
+		case 1:// 도서 등록
+			System.out.println("===도서등록을 시작합니다.안내 순서에 따라 값을 입력해주세요");
+			System.out.println("===등록을 시작합니다.");
+			// 등록 인풋을 통한 입력 및 입력 완료 확인.
+			// 도서 추가 메소드 및 insert.
+			libboardDao.addbook();
+
+			System.out.println("1.등록\t2.수정\t3.삭제\t4대출확인\t5.도서조회\t0.이전화면이동");
+			System.out.println("해당 항목 선택 입력>>>");
 			break;
-		case 2://도서 수정
+		case 2:// 도서 수정
+			System.out.println("===도서수정을 시작합니다.");
+
+			
+			//번호입력에 따른 수정 메소드
+			libboardDao.modbook();
+			
 			break;
-		case 3://도서 삭제
+		case 3:// 도서 삭제
 			break;
-		case 4://대출 확인
+		case 4:// 대출 확인
 			break;
 		case 5://
 			break;
