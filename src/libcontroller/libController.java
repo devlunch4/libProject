@@ -4,13 +4,16 @@ import java.util.Map;
 
 import libUtil.ScanUtil;
 import libUtil.View;
+import libdao.libAdminDao;
 import libdao.libBoardDao;
 import libdao.libUserDao;
+import libservice.libAdminService;
 import libservice.libBoardService;
 import libservice.libUserService;
 
 public class libController {
 	public static Map<String, Object> Loginuserno;
+	public static Map<String, Object> Loginadminno;
 
 	// 메인메소드
 	public static void main(String[] args) {
@@ -21,9 +24,13 @@ public class libController {
 	}
 
 	private libUserService libuserService = libUserService.getInstance();
+	private libAdminService libadminService = libAdminService.getInstance();
 	private libBoardService libboardService = libBoardService.getInstance();
 	private libUserDao libuserDao = libUserDao.getInstance();
+	private libAdminDao libadminDao = libAdminDao.getInstance();
 	private libBoardDao libboardDao = libBoardDao.getInstance();
+
+
 
 	private void start() {
 		int view = View.HOME;
@@ -34,11 +41,13 @@ public class libController {
 				// 메인 메뉴 (첫화면)
 				view = home();
 				break;
-			// 멤버 로그인의 경우
+
 			case View.USERLOGIN:
+				// 멤버 로그인의 경우
 				view = libuserService.userlogin();
-				System.out.println("컨트롤러메소드상태 입력된 회원 아이디값: " + Loginuserno);
-				System.out.println("컨트롤러 View.USERLOGIN: 브레이크");
+
+				// 확인테스트출력
+				// System.out.println("컨트롤러메소드상태 입력된 회원 아이디값: " + Loginuserno);
 				break;
 
 			// 회월 로그인후 회원의 첫 메인메뉴
@@ -50,22 +59,39 @@ public class libController {
 			case View.USERBOOKSEARCH:
 				view = libuserService.userBookSearch();
 				break;
-//회원이 공지글을 읽기위한 메소드				
+
+			// 회원이 공지글을 읽기위한 메소드
 			case View.USERREADBOARD:
 				view = libuserService.userReadBoard();
 				break;
-				
+
 			// case View.APPLYBOARDSHOW:
 			// view = userBookSearch
+			// break;
 
 			// case View.USEREDIT:
 			// view = libuserService.userEdit();
+			// break;
 
 			case View.USERBOOKEXT:
 				view = libboardDao.userrent();
 				break;
-				
-				
+
+			// ////////////////////////////////
+			// 관리자 계정 관련 시작
+			// ////////////////////////////////
+
+			// 관리자 로그인
+			case View.ADMINLOGIN:
+				// 관리자 로그인 확인 메소드
+				view = libadminService.adminlogin();
+				break;
+
+			case View.ADMINMENU:
+				// 관리자 메뉴 진입
+				view = libadminService.adminMenu();
+				break;
+
 			}
 		}
 	}

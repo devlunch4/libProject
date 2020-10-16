@@ -1,5 +1,7 @@
 package libdao;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import libUtil.JDBCUtil;
@@ -87,6 +89,8 @@ public class libUserDao {
 		// jdbc.update(historysql);
 
 		// 연습용 만들어봄 (연장 유무 확인을 위해 출력 추가하여 실 사용)
+		System.err.print("선택 된 [" + historyinput+"] 번 도서");
 		jdbc.historyupdate(historysql);
 	}
+
 }

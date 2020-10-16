@@ -9,8 +9,10 @@ import libUtil.View;
 import libcontroller.libController;
 
 public class libUserService {
-	// 외부인스턴스 호출
+	// 각 외부 인스턴스 호출
 	private libUserDao libuserDao = libUserDao.getInstance();
+	private libBoardDao libboardDao = libBoardDao.getInstance();
+	private libBoardService libboardService = libBoardService.getInstance();
 
 	private libUserService() {
 	}
@@ -24,10 +26,6 @@ public class libUserService {
 		}
 		return instance;
 	}
-
-	// 각 인스턴스 호출
-	private libBoardDao libboardDao = libBoardDao.getInstance();
-	private libBoardService libboardService = libBoardService.getInstance();
 
 	// 회원로그인 호출시 입력 및 회원 메뉴 진입을 위한 메소드
 	public int userlogin() {
@@ -94,24 +92,23 @@ public class libUserService {
 		return View.USERMENU;
 	}
 
-	//회원 로그인후 3번 입력 후 이동된 공지글 조회
+	// 회원 로그인후 3번 입력 후 이동된 공지글 조회
 	public int userReadBoard() {
-		//공지글 출력
-		//공지번호,제목,작성자,작성일 조회
-		//제목의 경우 글자수10 제한, 내용의경우 글자수10제한 표현
-		
-		//보드서비스로 넘기기 = 게시공지글 출력 최근 3건만 출력
+		// 공지글 출력
+		// 공지번호,제목,작성자,작성일 조회
+		// 제목의 경우 글자수10 제한, 내용의경우 글자수10제한 표현
+
+		// 보드서비스로 넘기기 = 게시공지글 출력 최근 3건만 출력
 		libboardService.readNoticeboard();
-		
-		//조회된 게시글 중 선택된 게시글 번호의 내용 보기
+
+		// 조회된 게시글 중 선택된 게시글 번호의 내용 보기
 		libboardService.readNBCon();
-		
-		
+
 		return View.USERREADBOARD;
-		
+
 	}
 
-	//회원 로그인후 2번 입력 후 이동된 회원정보수정및도서연장 메인 메소드
+	// 회원 로그인후 2번 입력 후 이동된 회원정보수정및도서연장 메인 메소드
 	public int userEdit() {
 		System.out.println("===1-2회원정보수정 메뉴");
 		System.out.println("1.내정보수정 \t2.도서연장 \t0.이전메뉴");
@@ -184,4 +181,5 @@ public class libUserService {
 		// 상위메뉴 이동 1도서검색
 		return View.USERBOOKSEARCH;
 	}
+
 }

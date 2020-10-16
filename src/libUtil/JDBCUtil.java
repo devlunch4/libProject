@@ -340,7 +340,7 @@ public class JDBCUtil {
 	// 추가분
 	public int historyupdate(String sql) {
 		int result = 0;
-
+		
 		try {
 			con = DriverManager.getConnection(url, user, password);
 
@@ -348,9 +348,9 @@ public class JDBCUtil {
 
 			result = ps.executeUpdate();
 			if (result > 0) {
-				System.err.println("선택한 번호의 도서가 10일 연장되었습니다.");
+				System.out.println("가 10일 연장되었습니다.");
 			} else {
-				System.err.println("이미 연장된 도서입니다.");
+				System.out.println("는 이미 연장된 도서입니다.");
 			}
 
 		} catch (SQLException e) {

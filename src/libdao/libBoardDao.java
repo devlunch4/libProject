@@ -173,12 +173,12 @@ public class libBoardDao {
 
 	// 도서신청게시판 데이터 출력2
 	public void selectApplyBoard() {
-		System.out.print("신청번호\t신청도서정보\t\t회원번호\t\t신청일\t\t추천\t입고완료");
+		System.out.print("신청번호\t신청도서정보\t\t\t회원번호\t\t신청일\t\t추천\t입고완료");
 		System.out.println("");
 		try {
 			con = DriverManager.getConnection(url, user, password);
 
-			String sql = "SELECT findno, findcontext, userno, TO_DATE(TO_CHAR(finddate, 'YYYYMMDD'),'YYYYMMDD') finddate, recomm, arrange FROM libapplyboard ORDER BY findno";
+			String sql = "SELECT findno, findcontext, userno, TO_CHAR(finddate, 'YYYYMMDD') finddate, recomm, arrange FROM libapplyboard ORDER BY findno";
 
 			ps = con.prepareStatement(sql);
 
@@ -188,8 +188,8 @@ public class libBoardDao {
 				System.out.print(rs.getInt("findno") + "\t"
 						+ rs.getString("findcontext") + "\t\t\t"
 						+ rs.getString("userno") + "\t"
-						+ rs.getDate("finddate") + "\t" + rs.getInt("recomm")
-						+ "\t" + rs.getInt("arrange"));
+						+ rs.getString("finddate") + "\t"
+						+ rs.getInt("recomm") + "\t" + rs.getInt("arrange"));
 				System.out.println("");
 			}
 		} catch (SQLException e) {
