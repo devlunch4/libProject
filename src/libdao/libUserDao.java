@@ -70,7 +70,7 @@ public class libUserDao {
 
 	// 회원이 빌린 책중 반납기간 연장할 책을 선택하여 해당 책 증가
 	public void userbookext() {
-		System.out.println("도서연장을 대여번호 입력>>");
+		System.out.println("도서연장할 도서 대여번호 입력>>");
 		int historyinput = ScanUtil.nextInt();
 		Object userno = libController.Loginuserno.get("USERNO");
 		// 연장 가능 여부 확인후 연장가능여부값 변경 및 반납예정일 10일 증가

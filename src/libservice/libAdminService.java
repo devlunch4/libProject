@@ -108,18 +108,27 @@ public class libAdminService {
 			System.out.println("해당 항목 선택 입력>>>");
 			break;
 		case 2:// 도서 수정
+			//수정할 책의 isbn을 받아 정보 조회후 해당값을 수정한다.
 			System.out.println("===도서수정을 시작합니다.");
-
+			System.out.println("수정할 도서의 ISBN번호를 입력해주세요>>");
+			String modbookid = ScanUtil.nextLine();
 			
-			//번호입력에 따른 수정 메소드
-			libboardDao.modbook();
-			
+			//입력한 isbn 번호로 테이블내 정보 조회 및 출력
+			libboardDao.findbAdmin(modbookid);
+			//도서정보 출력완료
+			//			
+			//도서정보 수정 메소드 시작 update
+			libboardDao.udtfindbAdmin(modbookid);
 			break;
 		case 3:// 도서 삭제
+			System.err.println("!!!도서 삭제는 과거 대여내역 정보가 없는 도서만 삭제가 가능합니다.");
+			libboardDao.deletebook();
+			
 			break;
-		case 4:// 대출 확인
+		case 4:// 대출 확인			
+			libboardService.rentbookchk();
 			break;
-		case 5://
+		case 5:// 도서 조회
 			break;
 		case 0:
 			break;

@@ -1,6 +1,10 @@
 package libservice;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +14,15 @@ import libcontroller.libController;
 import libdao.libBoardDao;
 
 public class libBoardService {
+	// 기본 접속자 정보 변수 값 설정
+	String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	String user = "hr";
+	String password = "oracle";
+
+	Connection con = null;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+
 	private libBoardService() {
 	}
 
@@ -89,9 +102,7 @@ public class libBoardService {
 			System.out.print("\t\t" + readNoticeList.get(i).get("BCONTENT"));
 			System.out.print("\t\t" + readNoticeList.get(i).get("BWRITER"));
 			System.out.println("\t" + readNoticeList.get(i).get("BDATE"));
-
 		}
-
 		return View.USERREADBOARD;
 	}
 
@@ -105,10 +116,52 @@ public class libBoardService {
 		libboardDao.readNBone(readNBConno);
 
 		return View.USERREADBOARD;
+	}
+
+	// 대출중인 도서 조회
+	public void rentbookchk() {
+		System.out.println("===대출중 도서 조회");
+		try {
+			con = DriverManager.getConnection(url, user, password);
+//조인문을 활용하여 정보 출력 테이블 (libbookinfo/libhistory)
+			// 회원번호,대여내역번호,isbn번호,제목(일부분만),반납일예상일,연장가능유무
+			String rentchksql = "SELECT a.userno, a.historyno, a.bookno, substr(b.title,1,5) title, "
+					+ "TO_CHAR(a.expectdate,'YYYYMM') expectdate, a.extencan FROM libhistory a JOIN libbookinfo b ON a.bookno = b.bookno WHERE rentyesno = 1 ORDER BY a.userno, a.historyno";
+			ps = con.prepareStatement(rentchksql);
+			rs = ps.executeQuery();
+			System.out.println("회원번호\t\t내역번호\tISBN번호\t\t제목(5글자까지)\t\t반납예상일\t\td연장가능여부");
+			System.out.println("----------------------------------------------------------------------------------------");
+			while (rs.next()) {
+				System.out.println(rs.getInt("userno")
+				+ "\t" + rs.getString("historyno")
+				+ "\t" + rs.getString("bookno")
+				+ "\t" + rs.getString("title")
+				+ "\t\t\t" + rs.getString("expectdate")
+				+ "\t\t" + rs.getString("extencan")
+				);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (Exception e) {
+				}
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (Exception e) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (Exception e) {
+				}
+		}
 
 	}
 
-	
 	// ///////
 	// 관리자 권한 은 아래 메소드들
 
