@@ -129,6 +129,10 @@ public class libAdminService {
 			libboardService.rentbookchk();
 			break;
 		case 5:// 도서 조회
+			//도서 총 갯수 출력
+			libboardService.selectbookinfo();
+			//도서 해당월 검색 조회 출력
+			libboardService.selectmonthinput();
 			break;
 		case 0:
 			break;

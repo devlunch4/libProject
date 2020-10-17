@@ -28,6 +28,7 @@ DELETE LIBUSER;
 --도서정보추가 isbn 10자리로
 INSERT INTO libbookinfo VALUES(1111112345,'제목1','저자1','출판사1',SYSDATE,'ADMIN',0,SYSDATE);
 INSERT INTO libbookinfo VALUES(2222212345,'제목2','저자2','출판사2',SYSDATE,'ADMIN',1,SYSDATE); --대여중
+INSERT INTO libbookinfo VALUES(4444412345,'제목2','저자2','출판사2',SYSDATE,'ADMIN',1,SYSDATE); --대여중
 --도서조회
 SELECT * FROM libbookinfo;
 
@@ -70,3 +71,15 @@ commit;
 DESC libuser;
 --회원 확인조회
 SELECT * FROM libuser WHERE userno = 1234567891;
+
+
+--월별도서조회
+
+SELECT bookno, title, author, publisher, pdate, rentyesno, addbkdate FROM libbookinfo WHERE TO_CHAR(addbkadte,'YYYYMM') = '200906';
+출처: https://baljuhee.tistory.com/200 [BAL'S STORY]
+
+SELECT * FROM libbookinfo;
+
+UPDATE libbookinfo SET ADDBKDATE = TO_DATE('202009','YYYYMM') WHERE title = '1';
+
+ commit;

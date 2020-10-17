@@ -29,7 +29,7 @@ public class JDBCUtil {
 	// 접속자
 	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	private String user = "hr";
-	private String password = "oracle";
+	private String password = "java";
 
 	private Connection con = null;
 	private PreparedStatement ps = null;

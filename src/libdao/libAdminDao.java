@@ -10,7 +10,7 @@ public class libAdminDao {
 
 	// jdbc 인스턴스 호출
 	private JDBCUtil jdbc = JDBCUtil.getInstance();
-	
+
 	private libAdminDao() {
 	}
 

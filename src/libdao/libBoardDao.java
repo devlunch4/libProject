@@ -18,7 +18,7 @@ public class libBoardDao {
 	// 기본 접속자 정보 변수 값 설정
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String user = "hr";
-	String password = "oracle";
+	String password = "java";
 
 	Connection con = null;
 	PreparedStatement ps = null;
@@ -573,9 +573,10 @@ public class libBoardDao {
 	// 도서정보 수정 메소드 참고 bookboardsearch() 참고
 	public void udtfindbAdmin(String modbookid) {
 
-		System.out.println("======위에 출력된 정보가 확인 된다면 수정이 가능합니다.");
+		System.err.println("======위 출력된 정보가 확인 된다면 수정이 가능합니다.");
+		System.out.println(">>>수정 가능한 항목");
 		System.out.println("1.ISBN번호\t2.제목\t3.저자\t4.출판사\t5.출간일\t6.대여여부\t0.이전화면돌아가기");
-		System.out.println("수정할 항목을 선택>>");
+		System.out.println("수정할 항목을 선택>?>");
 		int mname = ScanUtil.nextInt();
 
 		if (mname == 0) {
