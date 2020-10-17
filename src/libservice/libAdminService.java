@@ -68,6 +68,7 @@ public class libAdminService {
 		case 2:
 			// 공지글관리
 			// 공지글관리 메소드 진입
+			libboardService.noticectrl();
 			break;
 		case 3:
 			// 회원관리

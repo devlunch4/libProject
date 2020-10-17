@@ -97,10 +97,13 @@ public class libBoardDao {
 
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
-			System.out.println("===도서 검색 항목 : " + ssname + ", 검색 값 : " + fvalue);
+			System.out
+					.println("===도서 검색 항목 : " + ssname + ", 검색 값 : " + fvalue);
 
 			while (rs.next()) {
-				if (rs.getString("bookno") != null || rs.getString("title") != null || rs.getString("author") != null
+				if (rs.getString("bookno") != null
+						|| rs.getString("title") != null
+						|| rs.getString("author") != null
 						|| rs.getString("publisher") != null) {
 					System.out.println("ISBN번호\t : " + rs.getString("bookno"));
 					System.out.println("제목\t : " + rs.getString("title"));
@@ -168,9 +171,11 @@ public class libBoardDao {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				System.out.print(rs.getInt("findno") + "\t" + rs.getString("findcontext") + "\t\t\t"
-						+ rs.getString("userno") + "\t" + rs.getString("finddate") + "\t" + rs.getInt("recomm") + "\t"
-						+ rs.getInt("arrange"));
+				System.out.print(rs.getInt("findno") + "\t"
+						+ rs.getString("findcontext") + "\t\t\t"
+						+ rs.getString("userno") + "\t"
+						+ rs.getString("finddate") + "\t" + rs.getInt("recomm")
+						+ "\t" + rs.getInt("arrange"));
 				System.out.println("");
 			}
 		} catch (SQLException e) {
@@ -213,8 +218,14 @@ public class libBoardDao {
 		// 출력(미구현)
 		try {
 			con = DriverManager.getConnection(url, user, password);
-			String sql = "INSERT INTO libapplyboard VALUES((select nvl(max(findno), 0) + 1 FROM libapplyboard), " + "'"
-					+ applystr + "'" + ", '" + userno1 + "'" + ", SYSDATE, " + recomm + ", " + arrange + ")";
+			String sql = "INSERT INTO libapplyboard VALUES((select nvl(max(findno), 0) + 1 FROM libapplyboard), "
+					+ "'"
+					+ applystr
+					+ "'"
+					+ ", '"
+					+ userno1
+					+ "'"
+					+ ", SYSDATE, " + recomm + ", " + arrange + ")";
 			ps = con.prepareStatement(sql);
 
 			int insertapplyresult = ps.executeUpdate();
@@ -253,8 +264,9 @@ public class libBoardDao {
 				try {
 					con = DriverManager.getConnection(url, user, password);
 					Object duserno = libController.Loginuserno.get("USERNO");
-					String sql = "DELETE FROM libapplyboard " + "where findno = " + deleteno + " AND userno = " + "'"
-							+ duserno + "'";
+					String sql = "DELETE FROM libapplyboard "
+							+ "where findno = " + deleteno + " AND userno = "
+							+ "'" + duserno + "'";
 
 					ps = con.prepareStatement(sql);
 
@@ -304,8 +316,8 @@ public class libBoardDao {
 			// 로그인 회원의 정보
 			Object loginuser = libController.Loginuserno.get("USERNO");
 
-			String sql = "SELECT userno, uname, ubirth, uaddress, uphone, uadddate FROM libuser WHERE userno = " + "'"
-					+ loginuser + "'";
+			String sql = "SELECT userno, uname, ubirth, uaddress, uphone, uadddate FROM libuser WHERE userno = "
+					+ "'" + loginuser + "'";
 
 			// 위의 검색 항목에 따른 검색 값에 따른 sql쿼리문 작성 후 조회 출력
 			con = DriverManager.getConnection(url, user, password);
@@ -361,7 +373,8 @@ public class libBoardDao {
 			rs = ps.executeQuery();
 			System.out.print("대여내역번호\t제목\t\t출판사\t\t대여일\t\t반납예정일\t\t연장가능유무");
 			System.out.println("");
-			System.out.println("------------------------------------------------------------------------------------");
+			System.out
+					.println("------------------------------------------------------------------------------------");
 
 			while (rs.next()) {
 
@@ -485,8 +498,10 @@ public class libBoardDao {
 		// 7번은 지정 초기값 =0
 		// 8번은 도서등록날짜 sql sysdate 사용.
 
-		String addboosql = "INSERT INTO libbookinfo values(" + isbnno + ", '" + btitle + "', '" + bwriter + "',' "
-				+ publisher + "', TO_DATE('" + pdate + "', 'YYYYMM'), '" + adminno + "', '0', SYSDATE)";
+		String addboosql = "INSERT INTO libbookinfo values(" + isbnno + ", '"
+				+ btitle + "', '" + bwriter + "',' " + publisher
+				+ "', TO_DATE('" + pdate + "', 'YYYYMM'), '" + adminno
+				+ "', '0', SYSDATE)";
 
 		try {
 			con = DriverManager.getConnection(url, user, password);
@@ -527,8 +542,11 @@ public class libBoardDao {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				if (rs.getString("bookno") != null || rs.getString("title") != null || rs.getString("author") != null
-						|| rs.getString("publisher") != null || rs.getString("pdate") != null
+				if (rs.getString("bookno") != null
+						|| rs.getString("title") != null
+						|| rs.getString("author") != null
+						|| rs.getString("publisher") != null
+						|| rs.getString("pdate") != null
 						|| rs.getString("rentyesno") != null) {
 					int rentyesno = rs.getInt("rentyesno");
 					String ibookstr = null;
@@ -537,10 +555,13 @@ public class libBoardDao {
 					} else if (rentyesno == 1)
 						ibookstr = "대여 중";
 					System.out.println("===검색된 도서 정보");
-					System.out.println("ISBN번호\t\t제목\t\t\t저자\t출판사\t\t출간일\t\t대여여부");
-					System.out.println(
-							rs.getString("bookno") + "\t" + rs.getString("title") + "\t\t" + rs.getString("author")
-									+ "\t" + rs.getString("publisher") + "\t" + rs.getDate("pdate") + "\t" + ibookstr);
+					System.out
+							.println("ISBN번호\t\t제목\t\t\t저자\t출판사\t\t출간일\t\t대여여부");
+					System.out.println(rs.getString("bookno") + "\t"
+							+ rs.getString("title") + "\t\t"
+							+ rs.getString("author") + "\t"
+							+ rs.getString("publisher") + "\t"
+							+ rs.getDate("pdate") + "\t" + ibookstr);
 					System.out.println("===도서 검색 완료");
 					// 검색항목 출력 완료
 
@@ -575,7 +596,8 @@ public class libBoardDao {
 
 		System.err.println("======위 출력된 정보가 확인 된다면 수정이 가능합니다.");
 		System.out.println(">>>수정 가능한 항목");
-		System.out.println("1.ISBN번호\t2.제목\t3.저자\t4.출판사\t5.출간일\t6.대여여부\t0.이전화면돌아가기");
+		System.out
+				.println("1.ISBN번호\t2.제목\t3.저자\t4.출판사\t5.출간일\t6.대여여부\t0.이전화면돌아가기");
 		System.out.println("수정할 항목을 선택>?>");
 		int mname = ScanUtil.nextInt();
 
@@ -615,10 +637,10 @@ public class libBoardDao {
 			ssname = "출간일";
 			mvalue = "TO_DATE('" + mvalue + "', 'YYYYMM')";
 			break;
-//		case 6:
-//			sname = "rentyesno";
-//			ssname = "대여여부";
-//			break;
+		// case 6:
+		// sname = "rentyesno";
+		// ssname = "대여여부";
+		// break;
 		case 0:
 			break;
 
@@ -631,7 +653,8 @@ public class libBoardDao {
 			// 위의 검색 항목에 따른 검색 값에 따른 sql쿼리문 작성 후 조회 출력
 			con = DriverManager.getConnection(url, user, password);
 
-			String updatesql = "UPDATE libbookinfo SET " + sname + " = " + mvalue + "WHERE bookno = " + modbookid;
+			String updatesql = "UPDATE libbookinfo SET " + sname + " = "
+					+ mvalue + "WHERE bookno = " + modbookid;
 			ps = con.prepareStatement(updatesql);
 
 			int result = ps.executeUpdate();
@@ -666,15 +689,18 @@ public class libBoardDao {
 		try {
 			con = DriverManager.getConnection(url, user, password);
 
-			String dsql = "DELETE FROM libbookinfo " + "WHERE bookno = " + deleteno;
+			String dsql = "DELETE FROM libbookinfo " + "WHERE bookno = "
+					+ deleteno;
 			ps = con.prepareStatement(dsql);
 
 			int result = ps.executeUpdate();
 			if (0 < result) {
-				System.out.println("ISBB번호 [" + deleteno + "] 도서의 삭제가 완료되었습니다.");
+				System.out
+						.println("ISBB번호 [" + deleteno + "] 도서의 삭제가 완료되었습니다.");
 			}
 		} catch (SQLException e) {
-			System.out.println("!!!!! ISBB번호 [" + deleteno + "] 도서는 대여 이력 존재, 제약조건에 의한 오류코드 발생");
+			System.out.println("!!!!! ISBB번호 [" + deleteno
+					+ "] 도서는 대여 이력 존재, 제약조건에 의한 오류코드 발생");
 			e.printStackTrace();
 		} finally {
 			if (rs != null)
@@ -699,4 +725,132 @@ public class libBoardDao {
 
 	}
 
+	public void insertB() {
+		System.out.println("===공지글등록");
+		System.out.println("안내순서에 맞추어 내용을 입력해주세요>>>");
+		// 1공지번호 2제목 3내용 -나머지 4작성자(조인활용) 5작성일 6관리자계정(입력만)
+		// 1 공지번호 자동완성
+		// 2
+		System.err.println("1.공지제목을 입력해주세요");
+		String btitle = ScanUtil.nextLine();
+		// 3
+		System.err.println("2.공지내용을 입력해주세요");
+		String bcontent = ScanUtil.nextLine();
+
+		// 4 조인문을 이용하여 관리자 이름을 출력한다.
+		// 5작성일 자동입력
+		// 6관리자계정 컨트롤에서 따옴
+		// libController.Loginadminno
+		Object cadminin = libController.Loginadminno.get("ADMINID");
+
+		String inputb = "INSERT INTO libboard (boardno, btitle, bcontent, bwriter, bdate,adminid) values("
+				+ "(SELECT nvl(MAX(boardno),0)+1 FROM libboard), '"
+				+ btitle
+				+ "', "
+				+ "'"
+				+ bcontent
+				+ "', "
+				+ "(SELECT adminnm FROM libadmin WHERE adminid = '"
+				+ cadminin
+				+ "'), " + "SYSDATE, '" + cadminin + "')";
+
+		try {
+			con = DriverManager.getConnection(url, user, password);
+			ps = con.prepareStatement(inputb);
+			int result = ps.executeUpdate();
+			if (0 < result) {
+				System.out.println("공지글 등록이 완료되었습니다.");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (Exception e) {
+				}
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (Exception e) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (Exception e) {
+				}
+		}
+	}
+
+	// 공지글 수정 메소드 제목 날짜만 수정
+	public void modB(int modno) {
+		// 이전메소드에서 게시글 번호를 가져옴
+		System.out.println("1.제목\t2.내용\t0.이전화면이동");
+		System.out.println("수정할 항목 선택 입력>>>");
+		int mmodno = ScanUtil.nextInt();
+		if (mmodno == 0) {
+			return;
+		} else {
+			System.out.println("변경 값 입력>>>");
+		}
+		// !!!!!!!!!!!!!!!!!!!
+		String mvalue = ScanUtil.nextLine();
+		String sname = null;
+		String ssname = null;
+
+		switch (mmodno) {
+		case 1: // 제목수정
+			sname = "btitle";
+			ssname = "공지제목";
+			break;
+		case 2: // 내용수정
+			sname = "bcontent";
+			ssname = "공지내용";
+			break;
+		case 0: // 이전화면이동
+			break;
+		default:
+			System.out.println("잘못된 공지항목 선택 입력입니다.");
+			break;
+		}
+
+		try {
+			// 로그인한 관리자 정보의 가져옴.
+			Object cadminid = libController.Loginadminno.get("ADMINID");
+
+			// 공지글 수정변경 호출
+			con = DriverManager.getConnection(url, user, password);
+
+			String upbql = "UPDATE libboard SET " + sname + " = '" + mvalue
+					+ "' WHERE boardno = " + modno + " AND adminid = '"
+					+ cadminid + "'";
+			ps = con.prepareStatement(upbql);
+			
+			int result = ps.executeUpdate();
+			
+			if (0 < result) {
+				System.out.println("[" + ssname + "]의 내용이 [" + mvalue
+						+ "]로 바뀌었습니다.");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (Exception e) {
+				}
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (Exception e) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (Exception e) {
+				}
+		}
+	}
 }

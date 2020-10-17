@@ -256,4 +256,74 @@ public class libBoardService {
 		}
 	}
 
+	public void noticectrl() {
+		// 공지글 출력 메소드 호출
+		selectnotice();
+		// 공지글 등록수정삭제  공지글 관리 메소드 호출
+		editnotice();
+	
+	}
+//공지글 등록수정삭제 관리 메뉴
+	private void editnotice() {
+		System.out.println("1등록\t2.수정\t3.삭제\t0.이전메뉴 돌아가기");
+		int editin = ScanUtil.nextInt();
+		switch (editin) {
+		case 1://공지글 등록
+			libboardDao.insertB();
+			break;
+		case 2://공지글 수정
+			System.out.println("===공지글수정");
+			System.out.println("수정할 공지번호 선택 입력>>>");
+			int modno = ScanUtil.nextInt();
+			
+			libboardDao.modB(modno);
+			break;
+		case 3://공지글 삭제
+			break;
+		case 0://이전메뉴로
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	// 공지글 출력 메소드 FROM noticectrl
+	private void selectnotice() {
+		// 공지내용 한정자 적용 필요 @
+		String noticesql = "SELECT boardno, btitle, bcontent, bwriter, bdate FROM libboard ORDER BY boardno";
+		try {
+			con = DriverManager.getConnection(url, user, password);
+			ps = con.prepareStatement(noticesql);
+			rs = ps.executeQuery();
+
+			System.out.println("공지번호\t공지제목\t\t공지내용\t\t\t작성자\t작성일");
+
+			while (rs.next()) {
+				System.out.println(rs.getString("boardno") + "\t"
+						+ rs.getString("btitle") + "\t\t"
+						+ rs.getString("bcontent") + "\t"
+						+ rs.getString("bwriter") + "\t" + rs.getDate("bdate"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (Exception e) {
+				}
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (Exception e) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (Exception e) {
+				}
+		}
+	}
+
 }
