@@ -34,17 +34,6 @@ public class libUserService {
 		String userno = ScanUtil.nextLine();
 		String password = null;
 
-		// //////
-		// 회원번호입력시 int 타입 입력이 아닐경구 에러 메소드후 재입력 가능한 메소드. 참고용 첨부함.
-		// while (!sc.hasNextInt()){
-		// //입력값 초기화
-		// sc.next(); //잘못된 입력 초기화
-		// System.err.println("에러! 해당 선택 번호를 입력 해주세요 : ");
-		// System.out.println("1.회원로그인 \t2.관리자로그인 \t0.프로그램종료");
-		// }
-		// int input = sc.nextInt();
-		// //////
-
 		// 회원테이블과 비교하여 테이블에 해당 정보 존재시 회원 로그인 완료
 		Map<String, Object> user = libuserDao.selectUser(userno, password);
 
@@ -193,4 +182,11 @@ public class libUserService {
 		return View.USERBOOKSEARCH;
 	}
 
+
+	
+	
+	
+	
+	
+	
 }

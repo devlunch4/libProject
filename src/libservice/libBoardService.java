@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import libUtil.JDBCUtil;
 import libUtil.ScanUtil;
 import libUtil.View;
 import libcontroller.libController;
@@ -18,11 +19,13 @@ public class libBoardService {
 	// 기본 접속자 정보 변수 값 설정
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String user = "hr";
-	String password = "java";
+	String password = "oracle";
 
 	Connection con = null;
 	PreparedStatement ps = null;
 	ResultSet rs = null;
+	// jdbc 호출
+	private static JDBCUtil jdbc = JDBCUtil.getInstance();
 
 	private libBoardService() {
 	}
@@ -127,19 +130,16 @@ public class libBoardService {
 			// 조인문을 활용하여 정보 출력 테이블 (libbookinfo/libhistory)
 			// 회원번호,대여내역번호,isbn번호,제목(일부분만),반납일예상일,연장가능유무
 			String rentchksql = "SELECT a.userno, a.historyno, a.bookno, substr(b.title,1,5) title, "
-					+ "TO_CHAR(a.expectdate,'YYYYMM') expectdate, a.extencan FROM libhistory a JOIN libbookinfo b ON a.bookno = b.bookno WHERE rentyesno = 1 ORDER BY a.userno, a.historyno";
+					+ "TO_CHAR(a.expectdate,'YYYYMMDD') expectdate, a.extencan FROM libhistory a JOIN libbookinfo b ON a.bookno = b.bookno WHERE rentyesno = 1 ORDER BY a.userno, a.historyno";
 			ps = con.prepareStatement(rentchksql);
 			rs = ps.executeQuery();
-			System.out
-					.println("회원번호\t\t내역번호\tISBN번호\t\t제목(5글자까지)\t\t반납예상일\t\td연장가능여부");
-			System.out
-					.println("----------------------------------------------------------------------------------------");
+			System.out.println("회원번호\t\t내역번호\tISBN번호\t\t제목(5글자까지)\t\t반납예상일\t\td연장가능여부");
+			System.out.println(
+					"----------------------------------------------------------------------------------------");
 			while (rs.next()) {
-				System.out.println(rs.getInt("userno") + "\t"
-						+ rs.getString("historyno") + "\t"
-						+ rs.getString("bookno") + "\t" + rs.getString("title")
-						+ "\t\t\t" + rs.getString("expectdate") + "\t\t"
-						+ rs.getString("extencan"));
+				System.out.println(rs.getInt("userno") + "\t" + rs.getString("historyno") + "\t"
+						+ rs.getString("bookno") + "\t" + rs.getString("title") + "\t\t\t" + rs.getString("expectdate")
+						+ "\t\t" + rs.getString("extencan"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -210,8 +210,8 @@ public class libBoardService {
 		String minput = ScanUtil.nextLine();
 
 		String monthsql = "SELECT bookno, title, author, publisher, TO_CHAR(pdate,'YYYYMMDD') pdate, "
-				+ "rentyesno, addbkdate FROM libbookinfo WHERE TO_CHAR(addbkdate,'YYYYMM') = "
-				+ "'" + yinput + minput + "' ORDER BY pdate";
+				+ "rentyesno, addbkdate FROM libbookinfo WHERE TO_CHAR(addbkdate,'YYYYMM') = " + "'" + yinput + minput
+				+ "' ORDER BY pdate";
 
 		int mcount = 0;
 
@@ -226,15 +226,11 @@ public class libBoardService {
 
 			while (rs.next()) {
 				mcount++;
-				System.out.println(rs.getString("bookno") + "\t"
-						+ rs.getString("title") + "\t\t"
-						+ rs.getString("author") + "\t"
-						+ rs.getString("publisher") + "\t"
-						+ rs.getString("pdate"));
+				System.out.println(rs.getString("bookno") + "\t" + rs.getString("title") + "\t\t"
+						+ rs.getString("author") + "\t" + rs.getString("publisher") + "\t" + rs.getString("pdate"));
 			}
 
-			System.out.println("===[" + mcount + "]건의 [" + yinput + "년 "
-					+ minput + "월] 에 등록된 도서");
+			System.out.println("===[" + mcount + "]건의 [" + yinput + "년 " + minput + "월] 에 등록된 도서");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -256,40 +252,8 @@ public class libBoardService {
 		}
 	}
 
-	public void noticectrl() {
-		// 공지글 출력 메소드 호출
-		selectnotice();
-		// 공지글 등록수정삭제  공지글 관리 메소드 호출
-		editnotice();
-	
-	}
-//공지글 등록수정삭제 관리 메뉴
-	private void editnotice() {
-		System.out.println("1등록\t2.수정\t3.삭제\t0.이전메뉴 돌아가기");
-		int editin = ScanUtil.nextInt();
-		switch (editin) {
-		case 1://공지글 등록
-			libboardDao.insertB();
-			break;
-		case 2://공지글 수정
-			System.out.println("===공지글수정");
-			System.out.println("수정할 공지번호 선택 입력>>>");
-			int modno = ScanUtil.nextInt();
-			
-			libboardDao.modB(modno);
-			break;
-		case 3://공지글 삭제
-			break;
-		case 0://이전메뉴로
-			break;
-
-		default:
-			break;
-		}
-	}
-
 	// 공지글 출력 메소드 FROM noticectrl
-	private void selectnotice() {
+	public void selectnotice() {
 		// 공지내용 한정자 적용 필요 @
 		String noticesql = "SELECT boardno, btitle, bcontent, bwriter, bdate FROM libboard ORDER BY boardno";
 		try {
@@ -300,10 +264,8 @@ public class libBoardService {
 			System.out.println("공지번호\t공지제목\t\t공지내용\t\t\t작성자\t작성일");
 
 			while (rs.next()) {
-				System.out.println(rs.getString("boardno") + "\t"
-						+ rs.getString("btitle") + "\t\t"
-						+ rs.getString("bcontent") + "\t"
-						+ rs.getString("bwriter") + "\t" + rs.getDate("bdate"));
+				System.out.println(rs.getString("boardno") + "\t" + rs.getString("btitle") + "\t\t"
+						+ rs.getString("bcontent") + "\t" + rs.getString("bwriter") + "\t" + rs.getDate("bdate"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -326,4 +288,177 @@ public class libBoardService {
 		}
 	}
 
-}
+	// 관리자의 신규회원 등록
+	public void userinfoaddin(String addusersql) {
+		// 신규회원등록
+		try {
+			con = DriverManager.getConnection(url, user, password);
+			ps = con.prepareStatement(addusersql);
+			int result = ps.executeUpdate();
+			if (0 < result) {
+				System.out.println("신규 회원 등록이 완료되었습니다.");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (Exception e) {
+				}
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (Exception e) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (Exception e) {
+				}
+		}
+	}
+
+	// 회원 검색에서 이름검색으로 된 회원 출력
+	public void viewNserch(String usernminput) {
+		System.out.println("====이름 검색 [" + usernminput + "] 님의 정보");
+//회원번호,이름,생년월일,주소,전화번호,생성일,,대여번호,대여중인책,반납예정일,
+		System.out.println("회원번호 \t\t 이름 \t 생년월일 \t\t 주소 \t 전화번호 \t\t 생성일 \t\t 대여번호 \t 대여중인책isbn \t 반납예정일 \t 연장완료");
+		try {
+			con = DriverManager.getConnection(url, user, password);
+			String sql = "SELECT u.userno, u.uname, TO_CHAR(u.ubirth,'YYYYMMDD') ubirth, u.uaddress, "
+					+ "u.uphone, TO_CHAR(u.uadddate,'YYYYMMDD') uadddate, "
+					+ "h.historyno, h.bookno, TO_CHAR(h.expectdate,'YYYYMMDD') expectdate, "
+					+ "DECODE(h.extencan,1,'연장가능',0,'연장불가') extencan " + "FROM libuser u, libhistory h "
+					+ "WHERE u.userno(+) = h.userno AND u.uname = '" + usernminput + "'";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				System.out.println(rs.getString("userno") + "\t" + rs.getString("uname") + "\t" + rs.getString("ubirth")
+						+ "\t" + rs.getString("uaddress") + "\t" + rs.getString("uphone") + "\t"
+						+ rs.getString("uadddate") + "\t" + rs.getString("historyno") + "\t" + rs.getString("bookno")
+						+ "\t" + rs.getString("expectdate") + "\t" + rs.getString("extencan") + "\t");
+			}
+			System.out.println("===============================================");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {// 실행
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (Exception e) {
+				}
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (Exception e) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (Exception e) {
+				}
+
+		}
+
+	}
+
+	//회원관리 >>전화번호 조회를 통한 
+	public void viewPserch(String userphinput) {
+		System.out.println("===전화번호 ["+userphinput+"] 소유자의 정보");
+		System.out.println("회원번호 \t\t 이름 \t 생년월일 \t\t 주소 \t 전화번호 \t\t 생성일 \t\t 대여번호 \t 대여중인책isbn \t 반납예정일 \t 연장완료");
+		try {
+			con = DriverManager.getConnection(url, user, password);
+
+			String sql = "SELECT u.userno, u.uname, TO_CHAR(u.ubirth,'YYYYMMDD') ubirth,"
+					+ " u.uaddress, u.uphone, TO_CHAR(u.uadddate,'YYYYMMDD') uadddate,"
+					+ " h.historyno, h.bookno, TO_CHAR(h.expectdate,'YYYYMMDD') expectdate,"
+					+ " DECODE(h.extencan, 1, '연장가능', 0, '연장불가') extencan" + " FROM libuser u, libhistory h"
+					+ " WHERE u.userno(+) = h.userno AND u.uphone = '" + userphinput + "'";
+
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				System.out.println(rs.getString("userno") + "\t" + rs.getString("uname") + "\t" + rs.getString("ubirth")
+						+ "\t" + rs.getString("uaddress") + "\t" + rs.getString("uphone") + "\t"
+						+ rs.getString("uadddate") + "\t" + rs.getString("historyno") + "\t" + rs.getString("bookno")
+						+ "\t" + rs.getString("expectdate") + "\t" + rs.getString("extencan") + "\t");
+			}
+			System.out.println("===============================================");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {// 실행
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (Exception e) {
+				}
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (Exception e) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (Exception e) {
+				}
+
+		}
+
+	}
+
+	// 관리자의 회원관리 조회에서의 모든 회원 조회
+	public void viewAserch() {
+		System.out.println("===모든 회원 정보");
+		System.out.println("회원번호 \t\t 이름 \t 생년월일 \t\t 주소 \t 전화번호 \t\t 생성일 \t\t 대여번호 \t 대여중인책isbn \t 반납예정일 \t 연장완료");
+		try {
+			con = DriverManager.getConnection(url, user, password);
+
+			String sql = "SELECT u.userno, u.uname, TO_CHAR(u.ubirth,'YYYYMMDD') ubirth,"
+					+ " u.uaddress, u.uphone, TO_CHAR(u.uadddate,'YYYYMMDD') uadddate,"
+					+ " h.historyno, h.bookno, TO_CHAR(h.expectdate,'YYYYMMDD') expectdate,"
+					+ " DECODE(h.extencan, 1, '연장가능', 0, '연장불가') extencan" + " FROM libuser u, libhistory h"
+					+ " WHERE u.userno(+) = h.userno";
+
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				System.out.println(rs.getString("userno") + "\t" + rs.getString("uname") + "\t" + rs.getString("ubirth")
+						+ "\t" + rs.getString("uaddress") + "\t" + rs.getString("uphone") + "\t"
+						+ rs.getString("uadddate") + "\t" + rs.getString("historyno") + "\t" + rs.getString("bookno")
+						+ "\t" + rs.getString("expectdate") + "\t" + rs.getString("extencan") + "\t");
+			}
+			System.out.println("===============================================");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {// 실행
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (Exception e) {
+				}
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (Exception e) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (Exception e) {
+				}
+
+		}
+
+	}
+		
+	
+
+}// 클래스 말단
