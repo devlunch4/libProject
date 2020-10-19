@@ -31,20 +31,23 @@ public class libUserDao {
 		String sql = "SELECT userno FROM libuser WHERE userno = " + userno;
 		return jdbc.selectOne(sql);
 	}
-	
+
 	public Map<String, Object> selectUserbook(String rentisbnno, Object password) {
-		String sql = "SELECT bookno FROM libbookinfo WHERE bookno = " + rentisbnno;
+		String sql = "SELECT bookno FROM libbookinfo WHERE bookno = "
+				+ rentisbnno;
 		return jdbc.selectOne(sql);
 	}
-	
-	//회원 이름 가져오기 매칭확인 (회원검색>이름검색에서 확인가능)
+
+	// 회원 이름 가져오기 매칭확인 (회원검색>이름검색에서 확인가능)
 	public Map<String, Object> selectUsernm(String uname) {
-		String sql = "SELECT uname FROM libuser WHERE uname = '" + uname+"'";
+		String sql = "SELECT uname FROM libuser WHERE uname = '" + uname + "'";
 		return jdbc.selectOne(sql);
 	}
-	//회원 이름 가져오기 매칭확인 (회원검색>전화검색에서 확인가능)
+
+	// 회원 이름 가져오기 매칭확인 (회원검색>전화검색에서 확인가능)
 	public Map<String, Object> selectUserPn(String uname1) {
-		String sql = "SELECT uphone FROM libuser WHERE uphone = '" + uname1+"'";
+		String sql = "SELECT uphone FROM libuser WHERE uphone = '" + uname1
+				+ "'";
 		return jdbc.selectOne(sql);
 	}
 
@@ -61,13 +64,15 @@ public class libUserDao {
 		case 1:// 주소변경
 			System.out.println("변경할 주소 내용 입력해주세요>>");
 			msql = ScanUtil.nextLine();
-			sql = "UPDATE libuser SET uaddress = '" + msql + "' WHERE userno = '" + muserno + "'";
+			sql = "UPDATE libuser SET uaddress = '" + msql
+					+ "' WHERE userno = '" + muserno + "'";
 			return jdbc.update(sql);
 
 		case 2:
 			System.out.println("변경할 전화번호를 입력해주세요>>");
 			msql = ScanUtil.nextLine();
-			sql = "UPDATE libuser SET uphone = '" + msql + "' WHERE userno = '" + muserno + "'";
+			sql = "UPDATE libuser SET uphone = '" + msql + "' WHERE userno = '"
+					+ muserno + "'";
 			return jdbc.update(sql);
 
 		case 0:
@@ -96,25 +101,29 @@ public class libUserDao {
 		case 1: // 이름
 			System.out.println("변경할 이름 입력해주세요>>");
 			msql = ScanUtil.nextLine();
-			sql = "UPDATE libuser SET uname = '" + msql + "' WHERE userno = '" + muserno + "'";
+			sql = "UPDATE libuser SET uname = '" + msql + "' WHERE userno = '"
+					+ muserno + "'";
 			return jdbc.update(sql);
 
 		case 2: // 생년월일
 			System.out.println("변경할 생년월일을 YYYYMMDD 양식으로 입력해주세요>>");
 			msql = ScanUtil.nextLine();
-			sql = "UPDATE libuser SET ubirth = TO_DATE('" + msql + "', 'YYYYMMDD') WHERE userno = '" + muserno + "'";
+			sql = "UPDATE libuser SET ubirth = TO_DATE('" + msql
+					+ "', 'YYYYMMDD') WHERE userno = '" + muserno + "'";
 			return jdbc.update(sql);
 
 		case 3:// 주소변경
 			System.out.println("변경할 주소 내용 입력해주세요>>");
 			msql = ScanUtil.nextLine();
-			sql = "UPDATE libuser SET uaddress = '" + msql + "' WHERE userno = '" + muserno + "'";
+			sql = "UPDATE libuser SET uaddress = '" + msql
+					+ "' WHERE userno = '" + muserno + "'";
 			return jdbc.update(sql);
 
 		case 4:
 			System.out.println("변경할 전화번호를 입력해주세요>>");
 			msql = ScanUtil.nextLine();
-			sql = "UPDATE libuser SET uphone = '" + msql + "' WHERE userno = '" + muserno + "'";
+			sql = "UPDATE libuser SET uphone = '" + msql + "' WHERE userno = '"
+					+ muserno + "'";
 			return jdbc.update(sql);
 
 		case 0:
@@ -136,8 +145,16 @@ public class libUserDao {
 		Object userno = libController.Loginuserno.get("USERNO");
 		// 연장 가능 여부 확인후 연장가능여부값 변경 및 반납예정일 10일 증가
 		String historysql = "UPDATE libhistory SET extencan = 1, expectdate = (SELECT expectdate FROM libhistory WHERE historyno = "
-				+ "'" + historyinput + "') + 10 " + "WHERE historyno = " + "'" + historyinput + "' AND userno = " + "'"
-				+ userno + "' AND extencan = 0";
+				+ "'"
+				+ historyinput
+				+ "') + 10 "
+				+ "WHERE historyno = "
+				+ "'"
+				+ historyinput
+				+ "' AND userno = "
+				+ "'"
+				+ userno
+				+ "' AND extencan = 0";
 
 		// jdbc.update(historysql);
 
@@ -146,6 +163,4 @@ public class libUserDao {
 		jdbc.historyupdate(historysql);
 	}
 
-	
-	
 }
