@@ -29,8 +29,15 @@ public class libUserService {
 
 	// 회원로그인 호출시 입력 및 회원 메뉴 진입을 위한 메소드
 	public int userlogin() {
-		System.out.println("=====회원로그인=====");
-		System.out.println("회원번호 10자리를 입력해주세요(바코드 인식해주세요)>>");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("■                회원로그인                                 ■");
+		System.out.println("■----------------------------------------■");
+		System.out.println("■          회원번호 10자리를 입력해주세요               ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		String userno = ScanUtil.nextLine();
 		String password = null;
 
@@ -38,16 +45,17 @@ public class libUserService {
 		Map<String, Object> user = libuserDao.selectUser(userno, password);
 
 		if (user == null) {
+			System.out.println("__________________________________________ ");
 			System.out.println("없는 회원번호입니다.재입력 바랍니다.");
 			// 아래 return View.USERMENU; 실행되도록함
 		} else {
-			System.out.println("로그인성공");
+			System.out.println("로그인성공😀");
 
 			// 유저정보 컨트롤러의 변수에 저장
 			libController.Loginuserno = user;
 
 			// 회원로그인 완료가 된다면 아래 수행
-			System.out.println("회원로그인 아이디 확인" + libController.Loginuserno);
+			//System.out.println("회원로그인 아이디 확인" + libController.Loginuserno);
 
 			// 회원로그인 완료후 항목 선택 메뉴가 나오도록함 userA 메소드 호출
 			return View.USERMENU;
@@ -58,8 +66,16 @@ public class libUserService {
 
 	// 회원로그인후 회원전용메뉴 진입
 	public int userMenu() {
-		System.out.println("===회원 메인 메뉴");
-		System.out.println("1.도서검색 \t2.회원정보수정및대여연장 \t3.공지글조회 \t0.로그아웃");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[회원전용]         메인메뉴                                     Ⅰ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 1.도서검색                2.회원정보수정 및 도서대여연장 ■");
+		System.out.println("■ 3.공지글 조회            0.로그아웃                              ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		int input = ScanUtil.nextInt();
 
 		switch (input) {
@@ -67,7 +83,8 @@ public class libUserService {
 			System.out.println("1번 도서검색을 선택했습니다");
 			// 도서테이블 활용하여 도서검색 시작
 			userBookSearch();
-			return View.USERBOOKSEARCH;
+			return View.USERMENU;
+			
 			// break;
 
 		case 2: // 2.회원정보수정
@@ -105,14 +122,20 @@ public class libUserService {
 		libboardService.readNBCon();
 
 		return View.USERREADBOARD;
-
 	}
 
-	// 회원 로그인후 2번 입력 후 이동된 회원정보수정및도서연장 메인 메소드
+	// 회원 로그인후 2번 입력 후 이동된 회원정보수정및도서연장 메인 메소드1
+	
 	public int userEdit() {
-		System.out.println("===1-2회원정보수정 메뉴");
-		System.out.println("1.내정보수정 \t2.도서연장 \t0.이전메뉴");
-		System.out.println("번호 선택 입력>");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[회원전용]           회원정보                           Ⅰ - Ⅱ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 1.내 정보수정       2.대여일 연장            0.이전메뉴   ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 
 		int edinput = ScanUtil.nextInt();
 		switch (edinput) {
@@ -123,14 +146,21 @@ public class libUserService {
 			// 수정할 사항 선택 및 수정 이전화면 가기
 			libuserDao.userModify();
 
-			System.out.println("회원정보가 수정되었습니다.");
-
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[회원전용]           수정완료                          Ⅰ - Ⅴ      ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+			
 			// 출력할 컬럼값 선택후 변경
-
-			break;
+			
+			return userEdit();
+			
 		case 2: // 도서연장
 			// 내가 대출중인 도서 출력
 			libboardDao.userrent();
+
 			// 위 메소드 내부에 아래 메소드 추가
 			// 도서 반납기간 연장 메소드는 libboardDao.userrent() >>> libuserDao 클래스에 있음
 			// libuserDao.userbookext();
@@ -147,25 +177,31 @@ public class libUserService {
 		}
 
 		return View.USEREDIT;
-
+		
 	}
 
 	// 회원 로그인후 메인메뉴 1번 도서검색 메뉴
 	public int userBookSearch() {
-		System.out.println("===1-1도서검색 메뉴");
-		System.out.println("1.도서조회 \t2.도서신청 \t0.이전화면");
-		System.out.println("번호 선택 입력>");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[회원전용]         도서검색                               Ⅰ - Ⅱ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 1.도서조회      2.도서신청                       0.이전화면 ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 
 		int input = ScanUtil.nextInt();
 
 		switch (input) {
 		case 1:
-			System.out.println("===도서조회메뉴");
+			//System.out.println("===도서조회메뉴");
 			libboardDao.bookboardsearch();
 			return View.USERBOOKSEARCH;
 		case 2:
 			// 도서신청 게시판에 글입력
-			System.out.println("===도서신청메뉴");
+			//System.out.println("===도서신청메뉴");
 			// 신청된 도서리스트 보여주기
 			libboardService.applyBoardShow();
 			// 도서 신청글 등록 완료.
@@ -182,11 +218,4 @@ public class libUserService {
 		return View.USERBOOKSEARCH;
 	}
 
-
-	
-	
-	
-	
-	
-	
 }
