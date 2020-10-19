@@ -54,30 +54,43 @@ public class libBoardService {
 
 	// 도서 신청 게시판 보기 >> 출력후 등록 // 만약 삭제구현시 작성자 아이디가 해당 접속자글만 삭제가능함
 	public int applyBoardShow() {
-		System.out.println("===도서신청게시판");
+//		System.out.println("===도서신청게시판");
 
 		// 도서신청게시판 조회 출력
 		libboardDao.selectApplyBoard();
 
-		System.out.println("===도서신청 게시판메뉴");
-		System.out.println("1.도서신청 글등록   2.도서신청 글삭제   0.이전화면");
-		System.out.println("신청게시판에서 수행할 번호 입력");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[회원전용]           도서신청                           Ⅰ - Ⅱ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 1.도서신청 등록       2.신청도서 삭제      0.이전메뉴   ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 
 		int applyinput = ScanUtil.nextInt();
 		switch (applyinput) {
 		case 1:
-			System.out.println("==도서신청글 등록");
+//			System.out.println("==도서신청글 등록");
 			libboardDao.insertApply();
-			libboardDao.selectApplyBoard();
+
 			return View.APPLYBOARDSHOW;
 
 		case 2:
-			System.out.println("==도서신청글 삭제");
-			System.out.println("삭제할 신청글 번호를 입력해주세요>>");
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[회원전용]       도서신청글 삭제                        Ⅰ - Ⅲ     ");
+			System.out.println("------------------------------------------");
+			System.out.println("■ 삭제할 신청글 번호를 입력해주세요                              ■");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+			System.out.println("입력창 >");
 			int deleteno = ScanUtil.nextInt();
 
 			libboardDao.deleteApply(deleteno);
-			libboardDao.selectApplyBoard();
+
 			return View.APPLYBOARDSHOW;
 
 		case 0:
@@ -98,22 +111,32 @@ public class libBoardService {
 		// 공지게시글 리스트로 추출 공지글은 무조건 3개 이상 존재하고있음.
 		List<Map<String, Object>> readNoticeList = libboardDao.selectNoticeU();
 
-		System.out.println("===최근 공지 게시글 3건만 보여집니다. ");
-		System.out.println("공지번호\t공지제목\t\t\t공지내용\t\t\t공지작성자\t공지게시일");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[회원전용]           공지게시판                        Ⅰ - Ⅱ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("    \t       최근 공지 게시글 3건만 보여집니다    ");
+		System.out.println("------------------------------------------");
+		System.out.println("번호\t제목\t\t     작성자             게시일");
 		for (int i = 0; i < 3; i++) {
-			System.out.print(readNoticeList.get(i).get("BOARDNO"));
+			System.out.print(" "+readNoticeList.get(i).get("BOARDNO"));
 			System.out.print("\t" + readNoticeList.get(i).get("BTITLE"));
-			System.out.print("\t\t" + readNoticeList.get(i).get("BCONTENT"));
-			System.out.print("\t\t" + readNoticeList.get(i).get("BWRITER"));
-			System.out.println("\t" + readNoticeList.get(i).get("BDATE"));
+			System.out.print("   " + readNoticeList.get(i).get("BWRITER"));
+			System.out.println("\t  " + readNoticeList.get(i).get("BDATE"));
 		}
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("■ 조회할 게시글 번호를 입력해주세요                              ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		return View.USERREADBOARD;
 	}
 
 	// 조회번호를 입력받아 해당 게시글 출력
 	public int readNBCon() {
 		// 조회할 공지게시글 번호 입력 받기
-		System.out.println("내용 확인 할 게시글 번호 입력>");
+//		System.out.println("내용 확인 할 게시글 번호 입력>");
 		int readNBConno = ScanUtil.nextInt();
 
 		// 입력받은 게시글 출력
@@ -133,16 +156,13 @@ public class libBoardService {
 					+ "TO_CHAR(a.expectdate,'YYYYMMDD') expectdate, a.extencan FROM libhistory a JOIN libbookinfo b ON a.bookno = b.bookno WHERE rentyesno = 1 ORDER BY a.userno, a.historyno";
 			ps = con.prepareStatement(rentchksql);
 			rs = ps.executeQuery();
-			System.out
-					.println("회원번호\t\t내역번호\tISBN번호\t\t제목(5글자까지)\t\t반납예상일\t\td연장가능여부");
-			System.out
-					.println("----------------------------------------------------------------------------------------");
+			System.out.println("회원번호\t\t내역번호\tISBN번호\t\t제목(5글자까지)\t\t반납예상일\t\td연장가능여부");
+			System.out.println(
+					"----------------------------------------------------------------------------------------");
 			while (rs.next()) {
-				System.out.println(rs.getInt("userno") + "\t"
-						+ rs.getString("historyno") + "\t"
-						+ rs.getString("bookno") + "\t" + rs.getString("title")
-						+ "\t\t\t" + rs.getString("expectdate") + "\t\t"
-						+ rs.getString("extencan"));
+				System.out.println(rs.getInt("userno") + "\t" + rs.getString("historyno") + "\t"
+						+ rs.getString("bookno") + "\t" + rs.getString("title") + "\t\t\t" + rs.getString("expectdate")
+						+ "\t\t" + rs.getString("extencan"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -213,8 +233,8 @@ public class libBoardService {
 		String minput = ScanUtil.nextLine();
 
 		String monthsql = "SELECT bookno, title, author, publisher, TO_CHAR(pdate,'YYYYMMDD') pdate, "
-				+ "rentyesno, addbkdate FROM libbookinfo WHERE TO_CHAR(addbkdate,'YYYYMM') = "
-				+ "'" + yinput + minput + "' ORDER BY pdate";
+				+ "rentyesno, addbkdate FROM libbookinfo WHERE TO_CHAR(addbkdate,'YYYYMM') = " + "'" + yinput + minput
+				+ "' ORDER BY pdate";
 
 		int mcount = 0;
 
@@ -229,15 +249,11 @@ public class libBoardService {
 
 			while (rs.next()) {
 				mcount++;
-				System.out.println(rs.getString("bookno") + "\t"
-						+ rs.getString("title") + "\t\t"
-						+ rs.getString("author") + "\t"
-						+ rs.getString("publisher") + "\t"
-						+ rs.getString("pdate"));
+				System.out.println(rs.getString("bookno") + "\t" + rs.getString("title") + "\t\t"
+						+ rs.getString("author") + "\t" + rs.getString("publisher") + "\t" + rs.getString("pdate"));
 			}
 
-			System.out.println("===[" + mcount + "]건의 [" + yinput + "년 "
-					+ minput + "월] 에 등록된 도서");
+			System.out.println("===[" + mcount + "]건의 [" + yinput + "년 " + minput + "월] 에 등록된 도서");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -271,10 +287,8 @@ public class libBoardService {
 			System.out.println("공지번호\t공지제목\t\t공지내용\t\t\t작성자\t작성일");
 
 			while (rs.next()) {
-				System.out.println(rs.getString("boardno") + "\t"
-						+ rs.getString("btitle") + "\t\t"
-						+ rs.getString("bcontent") + "\t"
-						+ rs.getString("bwriter") + "\t" + rs.getDate("bdate"));
+				System.out.println(rs.getString("boardno") + "\t" + rs.getString("btitle") + "\t\t"
+						+ rs.getString("bcontent") + "\t" + rs.getString("bwriter") + "\t" + rs.getDate("bdate"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -331,35 +345,26 @@ public class libBoardService {
 	// 회원 검색에서 이름검색으로 된 회원 출력
 	public void viewNserch(String usernminput) {
 		System.out.println("====이름 검색 [" + usernminput + "] 님의 정보");
-		// 회원번호,이름,생년월일,주소,전화번호,생성일,,대여번호,대여중인책,반납예정일,
-		System.out
-				.println("회원번호 \t\t 이름 \t 생년월일 \t\t 주소 \t 전화번호 \t\t 생성일 \t\t 대여번호 \t 대여중인책isbn \t 반납예정일 \t 연장완료");
+//회원번호,이름,생년월일,주소,전화번호,생성일,,대여번호,대여중인책,반납예정일,
+		System.out.println("회원번호 \t\t 이름 \t 생년월일 \t\t 주소 \t 전화번호 \t\t 생성일 \t\t 대여번호 \t 대여중인책isbn \t 반납예정일 \t 연장완료");
 		try {
 			con = DriverManager.getConnection(url, user, password);
 			String sql = "SELECT u.userno, u.uname, TO_CHAR(u.ubirth,'YYYYMMDD') ubirth, u.uaddress, "
 					+ "u.uphone, TO_CHAR(u.uadddate,'YYYYMMDD') uadddate, "
 					+ "h.historyno, h.bookno, TO_CHAR(h.expectdate,'YYYYMMDD') expectdate, "
-					+ "DECODE(h.extencan,1,'연장가능',0,'연장불가') extencan "
-					+ "FROM libuser u, libhistory h "
-					+ "WHERE u.userno(+) = h.userno AND u.uname = '"
-					+ usernminput + "'";
+					+ "DECODE(h.extencan,1,'연장가능',0,'연장불가') extencan " + "FROM libuser u, libhistory h "
+					+ "WHERE u.userno(+) = h.userno AND u.uname = '" + usernminput + "'";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 
-				System.out.println(rs.getString("userno") + "\t"
-						+ rs.getString("uname") + "\t" + rs.getString("ubirth")
-						+ "\t" + rs.getString("uaddress") + "\t"
-						+ rs.getString("uphone") + "\t"
-						+ rs.getString("uadddate") + "\t"
-						+ rs.getString("historyno") + "\t"
-						+ rs.getString("bookno") + "\t"
-						+ rs.getString("expectdate") + "\t"
-						+ rs.getString("extencan") + "\t");
+				System.out.println(rs.getString("userno") + "\t" + rs.getString("uname") + "\t" + rs.getString("ubirth")
+						+ "\t" + rs.getString("uaddress") + "\t" + rs.getString("uphone") + "\t"
+						+ rs.getString("uadddate") + "\t" + rs.getString("historyno") + "\t" + rs.getString("bookno")
+						+ "\t" + rs.getString("expectdate") + "\t" + rs.getString("extencan") + "\t");
 			}
-			System.out
-					.println("===============================================");
+			System.out.println("===============================================");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {// 실행
@@ -383,39 +388,30 @@ public class libBoardService {
 
 	}
 
-	// 회원관리 >>전화번호 조회를 통한
+	//회원관리 >>전화번호 조회를 통한 
 	public void viewPserch(String userphinput) {
-		System.out.println("===전화번호 [" + userphinput + "] 소유자의 정보");
-		System.out
-				.println("회원번호 \t\t 이름 \t 생년월일 \t\t 주소 \t 전화번호 \t\t 생성일 \t\t 대여번호 \t 대여중인책isbn \t 반납예정일 \t 연장완료");
+		System.out.println("===전화번호 ["+userphinput+"] 소유자의 정보");
+		System.out.println("회원번호 \t\t 이름 \t 생년월일 \t\t 주소 \t 전화번호 \t\t 생성일 \t\t 대여번호 \t 대여중인책isbn \t 반납예정일 \t 연장완료");
 		try {
 			con = DriverManager.getConnection(url, user, password);
 
 			String sql = "SELECT u.userno, u.uname, TO_CHAR(u.ubirth,'YYYYMMDD') ubirth,"
 					+ " u.uaddress, u.uphone, TO_CHAR(u.uadddate,'YYYYMMDD') uadddate,"
 					+ " h.historyno, h.bookno, TO_CHAR(h.expectdate,'YYYYMMDD') expectdate,"
-					+ " DECODE(h.extencan, 1, '연장가능', 0, '연장불가') extencan"
-					+ " FROM libuser u, libhistory h"
-					+ " WHERE u.userno(+) = h.userno AND u.uphone = '"
-					+ userphinput + "'";
+					+ " DECODE(h.extencan, 1, '연장가능', 0, '연장불가') extencan" + " FROM libuser u, libhistory h"
+					+ " WHERE u.userno(+) = h.userno AND u.uphone = '" + userphinput + "'";
 
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 
-				System.out.println(rs.getString("userno") + "\t"
-						+ rs.getString("uname") + "\t" + rs.getString("ubirth")
-						+ "\t" + rs.getString("uaddress") + "\t"
-						+ rs.getString("uphone") + "\t"
-						+ rs.getString("uadddate") + "\t"
-						+ rs.getString("historyno") + "\t"
-						+ rs.getString("bookno") + "\t"
-						+ rs.getString("expectdate") + "\t"
-						+ rs.getString("extencan") + "\t");
+				System.out.println(rs.getString("userno") + "\t" + rs.getString("uname") + "\t" + rs.getString("ubirth")
+						+ "\t" + rs.getString("uaddress") + "\t" + rs.getString("uphone") + "\t"
+						+ rs.getString("uadddate") + "\t" + rs.getString("historyno") + "\t" + rs.getString("bookno")
+						+ "\t" + rs.getString("expectdate") + "\t" + rs.getString("extencan") + "\t");
 			}
-			System.out
-					.println("===============================================");
+			System.out.println("===============================================");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {// 실행
@@ -442,16 +438,14 @@ public class libBoardService {
 	// 관리자의 회원관리 조회에서의 모든 회원 조회
 	public void viewAserch() {
 		System.out.println("===모든 회원 정보");
-		System.out
-				.println("회원번호 \t\t 이름 \t 생년월일 \t\t 주소 \t 전화번호 \t\t 생성일 \t\t 대여번호 \t 대여중인책isbn \t 반납예정일 \t 연장완료");
+		System.out.println("회원번호 \t\t 이름 \t 생년월일 \t\t 주소 \t 전화번호 \t\t 생성일 \t\t 대여번호 \t 대여중인책isbn \t 반납예정일 \t 연장완료");
 		try {
 			con = DriverManager.getConnection(url, user, password);
 
 			String sql = "SELECT u.userno, u.uname, TO_CHAR(u.ubirth,'YYYYMMDD') ubirth,"
 					+ " u.uaddress, u.uphone, TO_CHAR(u.uadddate,'YYYYMMDD') uadddate,"
 					+ " h.historyno, h.bookno, TO_CHAR(h.expectdate,'YYYYMMDD') expectdate,"
-					+ " DECODE(h.extencan, 1, '연장가능', 0, '연장불가') extencan"
-					+ " FROM libuser u, libhistory h"
+					+ " DECODE(h.extencan, 1, '연장가능', 0, '연장불가') extencan" + " FROM libuser u, libhistory h"
 					+ " WHERE u.userno(+) = h.userno";
 
 			ps = con.prepareStatement(sql);
@@ -459,18 +453,12 @@ public class libBoardService {
 
 			while (rs.next()) {
 
-				System.out.println(rs.getString("userno") + "\t"
-						+ rs.getString("uname") + "\t" + rs.getString("ubirth")
-						+ "\t" + rs.getString("uaddress") + "\t"
-						+ rs.getString("uphone") + "\t"
-						+ rs.getString("uadddate") + "\t"
-						+ rs.getString("historyno") + "\t"
-						+ rs.getString("bookno") + "\t"
-						+ rs.getString("expectdate") + "\t"
-						+ rs.getString("extencan") + "\t");
+				System.out.println(rs.getString("userno") + "\t" + rs.getString("uname") + "\t" + rs.getString("ubirth")
+						+ "\t" + rs.getString("uaddress") + "\t" + rs.getString("uphone") + "\t"
+						+ rs.getString("uadddate") + "\t" + rs.getString("historyno") + "\t" + rs.getString("bookno")
+						+ "\t" + rs.getString("expectdate") + "\t" + rs.getString("extencan") + "\t");
 			}
-			System.out
-					.println("===============================================");
+			System.out.println("===============================================");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {// 실행
@@ -493,5 +481,7 @@ public class libBoardService {
 		}
 
 	}
+		
+	
 
 }// 클래스 말단

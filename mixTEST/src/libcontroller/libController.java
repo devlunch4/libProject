@@ -31,6 +31,8 @@ public class libController {
 	private libAdminDao libadminDao = libAdminDao.getInstance();
 	private libBoardDao libboardDao = libBoardDao.getInstance();
 
+
+
 	private void start() {
 		int view = View.HOME;
 
@@ -39,6 +41,7 @@ public class libController {
 			case View.HOME:
 				// 메인 메뉴 (첫화면)
 				view = home();
+				
 				break;
 
 			case View.USERLOGIN:
@@ -97,24 +100,30 @@ public class libController {
 
 	// 첫 메인화면 출력 및 수행 메소드
 	private int home() {
-		System.out.println("----------------------------");
-		System.out.println("1.회원로그인 \t2.관리자로그인 \t0.프로그램종료");
-		System.out.println("----------------------------");
-		System.out.println("로그인 종류를 선택해주세요>>");
-
-		// 기존 사용하던것
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("■  1.회원로그인 \t2.관리자로그인   0.프로그램종료   ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("■          로그인 종류를 선택해주세요                      ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
+		
+		//기존 사용하던것
 		// int input = ScanUtil.nextInt();
-
-		// 로그인 계정권한별 잘못된타입 (int 타입이 아닌 다른 타입) 입력시 오류발생안내 재입력 요구
+		
+		//로그인 계정권한별 잘못된타입 (int 타입이 아닌 다른 타입) 입력시 오류발생안내 재입력 요구
 		Scanner sc = new Scanner(System.in);
-		while (!sc.hasNextInt()) {
-			// 입력값 초기화
-			sc.next(); // 잘못된 입력 초기화
+		while (!sc.hasNextInt()){
+			//입력값 초기화
+			sc.next(); //잘못된 입력 초기화
 			System.err.println("에러! 해당 선택 번호를 입력 해주세요 : ");
 			System.out.println("1.회원로그인 \t2.관리자로그인 \t0.프로그램종료");
 		}
 		int input = sc.nextInt();
-
+		
+		
+		
 		switch (input) {
 		case 1:
 			// 회원로그인선택시
