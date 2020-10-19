@@ -147,7 +147,6 @@ public class libBoardService {
 
 	// 대출중인 도서 조회
 	public void rentbookchk() {
-		System.out.println("===대출중 도서 조회");
 		try {
 			con = DriverManager.getConnection(url, user, password);
 			// 조인문을 활용하여 정보 출력 테이블 (libbookinfo/libhistory)
@@ -156,14 +155,20 @@ public class libBoardService {
 					+ "TO_CHAR(a.expectdate,'YYYYMMDD') expectdate, a.extencan FROM libhistory a JOIN libbookinfo b ON a.bookno = b.bookno WHERE rentyesno = 1 ORDER BY a.userno, a.historyno";
 			ps = con.prepareStatement(rentchksql);
 			rs = ps.executeQuery();
-			System.out.println("회원번호\t\t내역번호\tISBN번호\t\t제목(5글자까지)\t\t반납예상일\t\td연장가능여부");
-			System.out.println(
-					"----------------------------------------------------------------------------------------");
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[관리자]       현재 대출중인 도서 목록                Ⅰ - Ⅲ     ");
+			System.out.println("------------------------------------------");
+			System.out.println("회원번호\t내역번호\tISBN번호\t제목\t반납예상일\t연장여부");
 			while (rs.next()) {
 				System.out.println(rs.getInt("userno") + "\t" + rs.getString("historyno") + "\t"
-						+ rs.getString("bookno") + "\t" + rs.getString("title") + "\t\t\t" + rs.getString("expectdate")
-						+ "\t\t" + rs.getString("extencan"));
+						+ rs.getString("bookno") + "\t" + rs.getString("title") + "\t" + rs.getString("expectdate")
+						+ "\t" + rs.getString("extencan"));
 			}
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

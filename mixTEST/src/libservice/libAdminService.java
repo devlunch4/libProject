@@ -33,16 +33,36 @@ public class libAdminService {
 
 	// 관리자 로그인 메소드 정보 일치 확인
 	public int adminlogin() {
-		System.out.println("===관리자 로그인===");
-		System.out.println("관리자 계정 입력(*대소문자구별)>> ");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("■                관리자 로그인                             ■");
+		System.out.println("■----------------------------------------■");
+		System.out.println("■          관리자 계정을 입력해주세요                      ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		String adminid = ScanUtil.nextLine();
-		System.out.println("관리자 비밀번호 입력>>");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("■                관리자 로그인                             ■");
+		System.out.println("■----------------------------------------■");
+		System.out.println("■          관리자 비밀번호를 입력해주세                   ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		String adminpw = ScanUtil.nextLine();
 
 		Map<String, Object> admin = libadminDao.selectAdmin(adminid, adminpw);
 
 		if (admin == null) {
-			System.out.println("없는 관리자계정입니다. 재입력바랍니다.");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("■                             ※ 관리자 로그인 오류  ※                          ■");
+			System.out.println("■----------------------------------------■");
+			System.out.println("■        존재하지않는 계정 혹은 비밀번호입니다          ■");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 		} else {
 			System.out.println("관리자 로그인 성공");
 			// 관리자 정보 저장.
@@ -55,9 +75,16 @@ public class libAdminService {
 	// 관리자 로그인 후 메뉴화면
 	public int adminMenu() {
 
-		System.out.println("===관리자 메인 화면");
-		System.out.println("1.도서관리 \t 2.공지글관리 \t 3.회원관리 \t 4.도서대여 \t 0.로그아웃");
-		System.out.println("해당 항목 선택 입력>>>");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[관리자]          메인메뉴                                      Ⅰ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 1.도서관리       2.공지글관리       3.회원관리             ■");
+		System.out.println("■ 4.도서대여       0.로그아웃                                       ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		int input = ScanUtil.nextInt();
 
 		switch (input) {
@@ -262,26 +289,33 @@ public class libAdminService {
 
 	// 관리자 도서관리 진입
 	private int bookCtrl() {
-		System.out.println("===도서관리");
-		System.out.println("1.등록\t2.수정\t3.삭제\t4대출확인\t5.도서조회\t0.이전화면이동");
-		System.out.println("해당 항목 선택 입력>>>");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[관리자]           도서관리                              Ⅰ - Ⅱ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 1.도서등록       2.도서수정       3.도서삭제                ■");
+		System.out.println("■ 4.대출확인       5.도서조회       0.이전화면                ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		int inputctrl = ScanUtil.nextInt();
 
 		switch (inputctrl) {
 		case 1:// 도서 등록
-			System.out.println("===도서등록을 시작합니다.안내 순서에 따라 값을 입력해주세요");
-			System.out.println("===등록을 시작합니다.");
+//			System.out.println("===도서등록을 시작합니다.안내 순서에 따라 값을 입력해주세요");
+//			System.out.println("===등록을 시작합니다.");
 			// 등록 인풋을 통한 입력 및 입력 완료 확인.
 			// 도서 추가 메소드 및 insert.
 			libboardDao.addbook();
 
-			System.out.println("1.등록\t2.수정\t3.삭제\t4대출확인\t5.도서조회\t0.이전화면이동");
-			System.out.println("해당 항목 선택 입력>>>");
+//			System.out.println("1.등록\t2.수정\t3.삭제\t4대출확인\t5.도서조회\t0.이전화면이동");
+//			System.out.println("해당 항목 선택 입력>>>");
 			break;
 		case 2:// 도서 수정
 				// 수정할 책의 isbn을 받아 정보 조회후 해당값을 수정한다.
-			System.out.println("===도서수정을 시작합니다.");
-			System.out.println("수정할 도서의 ISBN번호를 입력해주세요>>");
+//			System.out.println("===도서수정을 시작합니다.");
+//			System.out.println("수정할 도서의 ISBN번호를 입력해주세요>>");
 			String modbookid = ScanUtil.nextLine();
 
 			// 입력한 isbn 번호로 테이블내 정보 조회 및 출력
@@ -292,7 +326,7 @@ public class libAdminService {
 			libboardDao.udtfindbAdmin(modbookid);
 			break;
 		case 3:// 도서 삭제
-			System.err.println("!!!도서 삭제는 과거 대여내역 정보가 없는 도서만 삭제가 가능합니다.");
+			
 			libboardDao.deletebook();
 
 			break;

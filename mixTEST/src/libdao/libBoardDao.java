@@ -524,15 +524,55 @@ public class libBoardDao {
 	// 도서 추가 메소드 바로 시작 insert
 	// 1책번호,2제목,3저자,4출판사,5출간일,6관리자계정,7대여초기 = 0 대여중=1,8도서등록일
 	public void addbook() {
-		System.err.println("1.ISBN번호 10자리를 입력해주세요>>>");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[관리자]           도서등록                             Ⅰ - Ⅲ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ ISBN번호 10자리를 입력해주세요                               ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		String isbnno = ScanUtil.nextLine();
-		System.err.println("2.제목을 입력해주세요>>>");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[관리자]           도서등록                             Ⅰ - Ⅲ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 도서제목을 입력해주세요                                            ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		String btitle = ScanUtil.nextLine();
-		System.err.println("3.저자를 입력해주세요>>>");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[관리자]           도서등록                             Ⅰ - Ⅲ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 저자를 입력해주세요                                                  ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		String bwriter = ScanUtil.nextLine();
-		System.err.println("4.출판사를 입력해주세요>>>");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[관리자]           도서등록                             Ⅰ - Ⅲ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 출판사를 입력해주세요                                               ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		String publisher = ScanUtil.nextLine();
-		System.err.println("5.출간일 년월 [YYYYMM] 양식으로 입력해주세요>>> ");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[관리자]           도서등록                             Ⅰ - Ⅲ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 출간일 년월 [YYYYMM] 양식으로 입력해주세요            ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		String pdate = ScanUtil.nextLine();
 		// 6번 관리자는 자동입력됨.
 		// libController.Loginadminno = admin; 사용
@@ -548,7 +588,14 @@ public class libBoardDao {
 			ps = con.prepareStatement(addboosql);
 			int result = ps.executeUpdate();
 			if (0 < result) {
-				System.out.println("등록이 완료되었습니다.");
+				System.out.println("  ");
+				System.out.println("__________________________________________ ");
+				System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+				System.out.println("[관리자]           도서등록                             Ⅰ - Ⅲ      ");
+				System.out.println("------------------------------------------");
+				System.out.println("■           도서등록이 완료되었습니다                     ■");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -628,16 +675,35 @@ public class libBoardDao {
 	// 도서정보 수정 메소드 참고 bookboardsearch() 참고
 	public void udtfindbAdmin(String modbookid) {
 
-		System.err.println("======위 출력된 정보가 확인 된다면 수정이 가능합니다.");
-		System.out.println(">>>수정 가능한 항목");
-		System.out.println("1.ISBN번호\t2.제목\t3.저자\t4.출판사\t5.출간일\t6.대여여부\t0.이전화면돌아가기");
-		System.out.println("수정할 항목을 선택>?>");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[관리자]           도서수정                             Ⅰ - Ⅲ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 1.ISBN수정       2.제목수정       3.저자수정              ■");
+		System.out.println("■ 4.출판사수정      5.출간일수정    6.대여여부수정        ■");
+		System.out.println("■ 0.이전화면                                                              ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		int mname = ScanUtil.nextInt();
 	
 		if (mname == 0) {
 			return;
 		} else {
-			System.out.print("변경할 값 입력(*날짜의 경우 YYYYMM 양식)>>>");
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[관리자]           도서수정                            Ⅰ - Ⅳ      ");
+			System.out.println("------------------------------------------");
+			System.out.println("■변경할 값 입력 날짜의 경우 YYYYMM               ■");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+			System.out.println("입력창 >");
+			
+			
+			
+			
 		}
 		String mvalue = ScanUtil.nextLine();
 		String sname = null;
@@ -681,7 +747,14 @@ public class libBoardDao {
 			break;
 
 		default:// 잘못된 입력
-			System.out.println("잘못된 입력입니다");
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[관리자]           도서수정                            Ⅰ - Ⅳ      ");
+			System.out.println("------------------------------------------");
+			System.out.println("■              잘못된 입력입니다                           ■");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 			break;
 		}
 
@@ -694,7 +767,14 @@ public class libBoardDao {
 
 			int result = ps.executeUpdate();
 			if (0 < result) {
-				System.out.println("수정이 완료되었습니다.");
+				System.out.println("  ");
+				System.out.println("__________________________________________ ");
+				System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+				System.out.println("[관리자]           도서수정                            Ⅰ - Ⅳ      ");
+				System.out.println("------------------------------------------");
+				System.out.println("■             수정이 완료 되었습니다                      ■");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -718,7 +798,16 @@ public class libBoardDao {
 	}
 
 	public void deletebook() {
-		System.out.println("삭제할 도서의 ISBN번호 입력>>>");
+		System.out.println("  ");
+		System.out.println("_________________________________________________ ");
+		System.out.println("■             xx 도서관 도서관리 프로그램              —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[관리자]              도서삭제                                    Ⅰ - Ⅳ      ");
+		System.out.println("-------------------------------------------------");
+		System.err.println("🖐도서 삭제는 과거 대여내역 정보가 없는 도서만 삭제가 가능합니다🖐");
+		System.out.println("■            삭제할 도서의 ISBN번호 입력                             ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		String deleteno = ScanUtil.nextLine();
 
 		try {
@@ -729,10 +818,24 @@ public class libBoardDao {
 
 			int result = ps.executeUpdate();
 			if (0 < result) {
-				System.out.println("ISBB번호 [" + deleteno + "] 도서의 삭제가 완료되었습니다.");
+				System.out.println("  ");
+				System.out.println("_________________________________________________ ");
+				System.out.println("■             xx 도서관 도서관리 프로그램              —  ▢  X ■ ");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+				System.out.println("[관리자]              도서삭제                                    Ⅰ - Ⅳ      ");
+				System.out.println("-------------------------------------------------");
+				System.out.println("■[" + deleteno + "] 도서의 삭제가 완료되었습니다               ■");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 			}
 		} catch (SQLException e) {
-			System.out.println("!!!!! ISBB번호 [" + deleteno + "] 도서는 대여 이력 존재, 제약조건에 의한 오류코드 발생");
+			System.out.println("  ");
+			System.out.println("_________________________________________________ ");
+			System.out.println("■             xx 도서관 도서관리 프로그램              —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[관리자]              도서삭제                                    Ⅰ - Ⅳ      ");
+			System.out.println("-------------------------------------------------");
+			System.out.println("■[" + deleteno + "] 도서는 대여 이력 존재 삭제 불가            ■");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 			e.printStackTrace();
 		} finally {
 			if (rs != null)
@@ -750,9 +853,9 @@ public class libBoardDao {
 					con.close();
 				} catch (Exception e) {
 				}
-			System.out.print(">>>");
-			System.err.print("에러코드가 보인다면 ");
-			System.out.println(" ISBB번호 [" + deleteno + "] 도서는 대여 이력이 존재합니다");
+//			System.out.print(">>>");
+//			System.err.print("에러코드가 보인다면 ");
+//			System.out.println(" ISBB번호 [" + deleteno + "] 도서는 대여 이력이 존재합니다");
 		}
 
 	}
