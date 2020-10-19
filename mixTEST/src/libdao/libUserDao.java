@@ -34,7 +34,7 @@ public class libUserDao {
 
 	public Map<String, Object> selectUserbook(String rentisbnno, Object password) {
 		String sql = "SELECT bookno FROM libbookinfo WHERE bookno = "
-				+ rentisbnno;
+				+ rentisbnno + "AND rentyesno = 0";
 		return jdbc.selectOne(sql);
 	}
 
@@ -162,5 +162,6 @@ public class libUserDao {
 		System.err.print("선택 된 [" + historyinput + "] 번 도서");
 		jdbc.historyupdate(historysql);
 	}
+
 
 }

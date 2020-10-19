@@ -1027,12 +1027,12 @@ public class libBoardDao {
 		Map<String, Object> book = libuserDao.selectUserbook(rentisbnno,
 				password);
 		if (book == null) {
-			System.out.println("!!!등록된 해당 도서는 없습니다.");
+			System.out.println("!!!등록된 해당 도서는 없거나 대여중입니다.");
 			return;
 		} else {
-
 			System.out.println("===대여정보 전송");
 			// sql 인서트
+	
 			try {
 				password = "java";
 				con = DriverManager.getConnection(url, user, password);
@@ -1041,15 +1041,20 @@ public class libBoardDao {
 						+ "', '"
 						+ rentisbnno
 						+ "', SYSDATE, null, SYSDATE+10,1)";
-
-				// +
 				// " WHERE (SELECT RENTYESNO FROM libbookinfo WHERE bookno = '"
 				// + rentisbnno+"') = 0";
 				ps = con.prepareStatement(sql);
 				int insertrentresult = ps.executeUpdate();
+				
+				//업데이트문으로 책정보를 대여중으로 바꿔야함.
+				con = DriverManager.getConnection(url, user, password);
+				String updatesql = "UPDATE libbookinfo SET rentyesno = 1 WHERE bookno = '"+rentisbnno+"'"; 
+				ps = con.prepareStatement(updatesql);						
+				int updaterent = ps.executeUpdate();	
+						
 
-				if (0 < insertrentresult) {
-					System.out.println("신청글 등록 되었습니다.");
+				if (0 < insertrentresult && 0 < updaterent) {
+					System.out.println("대여 되었습니다.");
 				} else {
 					System.out.println("대여되지 않았습니다.");
 				}
