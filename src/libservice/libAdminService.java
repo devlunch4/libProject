@@ -413,19 +413,35 @@ public class libAdminService {
 
 		switch (inputctrl) {
 		case 1:// 도서 등록
-			System.out.println("===도서등록을 시작합니다.안내 순서에 따라 값을 입력해주세요");
-			System.out.println("===등록을 시작합니다.");
+//			System.out.println("  ");
+//			System.out.println("__________________________________________ ");
+//			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+//			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+//			System.out.println("[관리자]            도서 등록                          Ⅰ - Ⅲ   ");
+//			System.out.println("------------------------------------------");
+//			System.out.println("■ 도서등록을 시작합니다.                                  ■");
+//			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+//			System.out.println("입력창 >");
+//			System.out.println("===도서등록을 시작합니다.안내 순서에 따라 값을 입력해주세요");
+//			System.out.println("===등록을 시작합니다.");
 			// 등록 인풋을 통한 입력 및 입력 완료 확인.
 			// 도서 추가 메소드 및 insert.
 			libboardDao.addbook();
 
-			System.out.println("1.등록\t2.수정\t3.삭제\t4대출확인\t5.도서조회\t0.이전화면이동");
-			System.out.println("해당 항목 선택 입력>>>");
+//			System.out.println("1.등록\t2.수정\t3.삭제\t4대출확인\t5.도서조회\t0.이전화면이동");
+//			System.out.println("해당 항목 선택 입력>>>");
 			return bookCtrl();
 		case 2:// 도서 수정
 				// 수정할 책의 isbn을 받아 정보 조회후 해당값을 수정한다.
-			System.out.println("===도서수정을 시작합니다.");
-			System.out.println("수정할 도서의 ISBN번호를 입력해주세요>>");
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[관리자]          공지글 수정                           Ⅰ - Ⅲ      ");
+			System.out.println("------------------------------------------");
+			System.out.println("■ 수정할 도서번호를 입력해주세요                                  ■");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+			System.out.println("입력창 >");
 			String modbookid = ScanUtil.nextLine();
 
 			// 입력한 isbn 번호로 테이블내 정보 조회 및 출력

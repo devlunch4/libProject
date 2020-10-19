@@ -54,26 +54,45 @@ public class libBoardService {
 
 	// 도서 신청 게시판 보기 >> 출력후 등록 // 만약 삭제구현시 작성자 아이디가 해당 접속자글만 삭제가능함
 	public int applyBoardShow() {
-		System.out.println("===도서신청게시판");
-
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[회원전용]         도서신청                              Ⅰ - Ⅲ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 1.신청등록    2.신청삭제             0.이전화면             ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		// 도서신청게시판 조회 출력
 		libboardDao.selectApplyBoard();
 
-		System.out.println("===도서신청 게시판메뉴");
-		System.out.println("1.도서신청 글등록   2.도서신청 글삭제   0.이전화면");
-		System.out.println("신청게시판에서 수행할 번호 입력");
-
+		
 		int applyinput = ScanUtil.nextInt();
 		switch (applyinput) {
 		case 1:
-			System.out.println("==도서신청글 등록");
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[회원전용]         도서신청                              Ⅰ - Ⅳ      ");
+			System.out.println("------------------------------------------");
+			System.out.println("■ 신청도서를 입력해주세요                                            ■");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+			System.out.println("입력창 >");
 			libboardDao.insertApply();
 			libboardDao.selectApplyBoard();
 			return View.APPLYBOARDSHOW;
 
 		case 2:
-			System.out.println("==도서신청글 삭제");
-			System.out.println("삭제할 신청글 번호를 입력해주세요>>");
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[회원전용]         도서신청                              Ⅰ - Ⅳ      ");
+			System.out.println("------------------------------------------");
+			System.out.println("■ 삭제할 신청번호를 입력해주세요                                  ■");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+			System.out.println("입력창 >");
 			int deleteno = ScanUtil.nextInt();
 
 			libboardDao.deleteApply(deleteno);
@@ -81,7 +100,6 @@ public class libBoardService {
 			return View.APPLYBOARDSHOW;
 
 		case 0:
-			System.out.println("이전화면이동");
 			// 도서신청 메뉴이동(도서신청게시글 확인)
 			return View.APPLYBOARDSHOW;
 
@@ -217,8 +235,6 @@ public class libBoardService {
 
 	// 관리자 도서관리에서 도서조회에서 월별 조회 메소드
 	public void selectmonthinput() {
-		System.out.println("===해당 월에 등록된 도서 조회");
-		System.out.println("조회할 년도 'YYYY'형식으로 입력해주세요>>");
 		String yinput = ScanUtil.nextLine();
 		// System.out.println("  ");
 		System.out.println("__________________________________________ ");
@@ -260,14 +276,13 @@ public class libBoardService {
 					+ minput + " 월에 등록된 도서 조회결과     \t         Ⅰ - Ⅳ      ");
 			System.out
 					.println("---------------------------------------------------------------");
-			System.out.println(" ISBN번호\t제목\t    저자 \t출판사\t\t등록일");
-
+			System.out.println(" 도서번호\t\t제목\t\t 저자\t  출판사\t              등록일");
 			while (rs.next()) {
 				mcount++;
 				System.out.println(rs.getString("bookno") + "\t"
 						+ rs.getString("title") + "\t\t"
-						+ rs.getString("author") + "\t"
-						+ rs.getString("publisher") + "\t"
+						+ rs.getString("author") + " \t"
+						+ rs.getString("publisher") + "\t     "
 						+ rs.getString("pdate"));
 			}
 			System.out
@@ -316,10 +331,6 @@ public class libBoardService {
 			System.out.println("번호     제목\t\t    작성자\t    게시일");
 
 			while (rs.next()) {
-				// System.out.println(rs.getString("boardno") + "\t"
-				// + rs.getString("btitle") + "\t\t"
-				// + rs.getString("bcontent") + "\t"
-				// + rs.getString("bwriter") + "\t" + rs.getDate("bdate"));
 				System.out.println(" " + rs.getString("boardno") + "        "
 						+ rs.getString("btitle") + "\t" + "     "
 						+ rs.getString("bwriter") + "\t" + rs.getDate("bdate"));

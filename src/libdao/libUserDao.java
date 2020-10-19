@@ -31,7 +31,7 @@ public class libUserDao {
 		String sql = "SELECT userno FROM libuser WHERE userno = " + userno;
 		return jdbc.selectOne(sql);
 	}
-
+// 책이 있는지 없는지와 대여 가능 여부 확인 
 	public Map<String, Object> selectUserbook(String rentisbnno, Object password) {
 		String sql = "SELECT bookno FROM libbookinfo WHERE bookno = "
 				+ rentisbnno + "AND rentyesno = 0";
