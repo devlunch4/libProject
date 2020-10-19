@@ -206,7 +206,16 @@ public class libBoardService {
 			while (rs.next()) {
 				bcount++;
 			}
-			System.out.println("저장된 도서 정보 수 : " + bcount);
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[관리자]            도서조회                           Ⅰ - Ⅲ      ");
+			System.out.println("------------------------------------------");
+			System.out.println("■ 저장된 도서 정보 수 : " + bcount   +"권\t\t\t  "+   "■");
+			System.out.println("■ 조회할 년도 'YYYY'형식으로 입력해주세요                  ■");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+			System.out.println("입력창 >");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -231,10 +240,18 @@ public class libBoardService {
 
 	// 관리자 도서관리에서 도서조회에서 월별 조회 메소드
 	public void selectmonthinput() {
-		System.out.println("===해당 월에 등록된 도서 조회");
-		System.out.println("조회할 년도 'YYYY'형식으로 입력해주세요>>");
+//		System.out.println("===해당 월에 등록된 도서 조회");
+//		System.out.println("조회할 년도 'YYYY'형식으로 입력해주세요>>");
 		String yinput = ScanUtil.nextLine();
-		System.out.println("조회할 월 'MM'형식으로 입력해주세요>>");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[관리자]            도서조회                           Ⅰ - Ⅲ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■조회할 월 'MM'형식으로 입력해주세요                           ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		String minput = ScanUtil.nextLine();
 
 		String monthsql = "SELECT bookno, title, author, publisher, TO_CHAR(pdate,'YYYYMMDD') pdate, "
@@ -243,22 +260,30 @@ public class libBoardService {
 
 		int mcount = 0;
 
-		System.out.println("===[" + yinput + "년 " + minput + "월] 에 등록된 도서 조회");
-
-		System.out.println("ISBN번호\t\t제목\t\t저자\t출판사\t등록일");
+//		System.out.println("===[" + yinput + "년 " + minput + "월] 에 등록된 도서 조회");
+//
+//		System.out.println("ISBN번호\t\t제목\t\t저자\t출판사\t등록일");
 
 		try {
 			con = DriverManager.getConnection(url, user, password);
 			ps = con.prepareStatement(monthsql);
 			rs = ps.executeQuery();
 
+			System.out.println("  ");
+			System.out.println("________________________________________________________________ ");
+			System.out.println("■                       xx 도서관 도서관리 프로그램                        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[관리자]"+"            " +yinput +"년"+ "    " + minput+ " 월에 등록된 도서 조회결과     \t         Ⅰ - Ⅳ      ");
+			System.out.println("---------------------------------------------------------------");
+			System.out.println(" ISBN번호\t제목\t    저자 \t출판사\t\t등록일");
 			while (rs.next()) {
 				mcount++;
-				System.out.println(rs.getString("bookno") + "\t" + rs.getString("title") + "\t\t"
-						+ rs.getString("author") + "\t" + rs.getString("publisher") + "\t" + rs.getString("pdate"));
+				System.out.println(rs.getString("bookno") + "\t" + rs.getString("title") + " \t\t"
+						+ rs.getString("author") + " \t" + rs.getString("publisher") + " \t" + rs.getString("pdate"));
 			}
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
 
-			System.out.println("===[" + mcount + "]건의 [" + yinput + "년 " + minput + "월] 에 등록된 도서");
+//			System.out.println("===[" + mcount + "]건의 [" + yinput + "년 " + minput + "월] 에 등록된 도서");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -289,12 +314,21 @@ public class libBoardService {
 			ps = con.prepareStatement(noticesql);
 			rs = ps.executeQuery();
 
-			System.out.println("공지번호\t공지제목\t\t공지내용\t\t\t작성자\t작성일");
-
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[관리자]           공지게시판                           Ⅰ - Ⅱ      ");
+			System.out.println("------------------------------------------");
+			System.out.println("번호     제목\t\t    작성자\t    게시일");
 			while (rs.next()) {
-				System.out.println(rs.getString("boardno") + "\t" + rs.getString("btitle") + "\t\t"
-						+ rs.getString("bcontent") + "\t" + rs.getString("bwriter") + "\t" + rs.getDate("bdate"));
-			}
+			System.out.println(" " + rs.getString("boardno") + "        " + rs.getString("btitle") + "\t"
+					+ "     " + rs.getString("bwriter") + "\t" + rs.getDate("bdate"));
+		}
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+			System.out.println("■ 1.등록    2.수정    3. 삭제                     0.이전화면 ■");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+			System.out.println("입력창 >");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -349,9 +383,7 @@ public class libBoardService {
 
 	// 회원 검색에서 이름검색으로 된 회원 출력
 	public void viewNserch(String usernminput) {
-		System.out.println("====이름 검색 [" + usernminput + "] 님의 정보");
 //회원번호,이름,생년월일,주소,전화번호,생성일,,대여번호,대여중인책,반납예정일,
-		System.out.println("회원번호 \t\t 이름 \t 생년월일 \t\t 주소 \t 전화번호 \t\t 생성일 \t\t 대여번호 \t 대여중인책isbn \t 반납예정일 \t 연장완료");
 		try {
 			con = DriverManager.getConnection(url, user, password);
 			String sql = "SELECT u.userno, u.uname, TO_CHAR(u.ubirth,'YYYYMMDD') ubirth, u.uaddress, "
@@ -361,15 +393,21 @@ public class libBoardService {
 					+ "WHERE u.userno(+) = h.userno AND u.uname = '" + usernminput + "'";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
-
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[관리자]      "+  usernminput + "님의 정보"+  "      Ⅰ - Ⅴ      ");
+			System.out.println("------------------------------------------");
+			System.out.println("회원번호 \t\t 이름 \t 생년월일 \t\t 주소 \t 전화번호 \t\t 생성일 \t\t 대여번호 \t 대여중인책isbn \t 반납예정일 \t 연장완료");
 			while (rs.next()) {
-
 				System.out.println(rs.getString("userno") + "\t" + rs.getString("uname") + "\t" + rs.getString("ubirth")
 						+ "\t" + rs.getString("uaddress") + "\t" + rs.getString("uphone") + "\t"
 						+ rs.getString("uadddate") + "\t" + rs.getString("historyno") + "\t" + rs.getString("bookno")
 						+ "\t" + rs.getString("expectdate") + "\t" + rs.getString("extencan") + "\t");
 			}
-			System.out.println("===============================================");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+			 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {// 실행
@@ -442,8 +480,8 @@ public class libBoardService {
 
 	// 관리자의 회원관리 조회에서의 모든 회원 조회
 	public void viewAserch() {
-		System.out.println("===모든 회원 정보");
-		System.out.println("회원번호 \t\t 이름 \t 생년월일 \t\t 주소 \t 전화번호 \t\t 생성일 \t\t 대여번호 \t 대여중인책isbn \t 반납예정일 \t 연장완료");
+//		System.out.println("===모든 회원 정보");
+//		System.out.println("회원번호 \t\t 이름 \t 생년월일 \t\t 주소 \t 전화번호 \t\t 생성일 \t\t 대여번호 \t 대여중인책isbn \t 반납예정일 \t 연장완료");
 		try {
 			con = DriverManager.getConnection(url, user, password);
 
@@ -456,14 +494,20 @@ public class libBoardService {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[관리자]        등록된 모든 회원 정보                 Ⅰ - Ⅲ     ");
+			System.out.println("------------------------------------------");
+			System.out.println("회원번호 \t\t 이름 \t 생년월일 \t\t 주소 \t 전화번호 \t\t 생성일 \t\t 대여번호 \t 대여중인책isbn \t 반납예정일 \t 연장완료");
 			while (rs.next()) {
-
-				System.out.println(rs.getString("userno") + "\t" + rs.getString("uname") + "\t" + rs.getString("ubirth")
-						+ "\t" + rs.getString("uaddress") + "\t" + rs.getString("uphone") + "\t"
-						+ rs.getString("uadddate") + "\t" + rs.getString("historyno") + "\t" + rs.getString("bookno")
-						+ "\t" + rs.getString("expectdate") + "\t" + rs.getString("extencan") + "\t");
-			}
-			System.out.println("===============================================");
+			System.out.println(rs.getString("userno") + "\t" + rs.getString("uname") + "\t" + rs.getString("ubirth")
+					+ "\t" + rs.getString("uaddress") + "\t" + rs.getString("uphone") + "\t"
+					+ rs.getString("uadddate") + "\t" + rs.getString("historyno") + "\t" + rs.getString("bookno")
+					+ "\t" + rs.getString("expectdate") + "\t" + rs.getString("extencan") + "\t");
+		}
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"); 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {// 실행

@@ -361,7 +361,7 @@ public class libBoardDao {
 				System.out.println("■ 이름 : " + rs.getString("uname")+ "\t\t\t\t ■");
 				System.out.println("■ 생년월일 : " + rs.getDate("ubirth")+ "\t\t\t ■");
 				System.out.println("■ 주소 : " + rs.getString("uaddress")+ "\t\t\t\t ■");
-				System.out.println("■ 전화번호 : " + rs.getString("uphone")+ "\t\t\t\t ■");
+				System.out.println("■ 전화번호 : " + rs.getString("uphone")+ "\t\t\t ■");
 				System.out.println("■ 생성일 : " + rs.getDate("uadddate")+ "\t\t\t ■");
 				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
 				System.out.println("■ 1.주소수정        2.전화번호 수정           0.이전메뉴    ■");
@@ -861,17 +861,27 @@ public class libBoardDao {
 	}
 
 	public void insertB() {
-		System.out.println("===공지글등록");
-		System.out.println("안내순서에 맞추어 내용을 입력해주세요>>>");
-		// 1공지번호 2제목 3내용 -나머지 4작성자(조인활용) 5작성일 6관리자계정(입력만)
-		// 1 공지번호 자동완성 입력됨
-		// 2 공지제목 입력
-		System.out.println("1.공지제목을 입력해주세요");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[관리자]          공지글 등록                           Ⅰ - Ⅲ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 등록하실 공지글의 제목을 입력해주세요                        ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		String btitle = ScanUtil.nextLine();
 		// 3 공지내용 입력
-		System.out.println("2.공지내용을 입력해주세요");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[관리자]          공지글 등록                           Ⅰ - Ⅲ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 등록하실 공지글의 내용을 입력해주세요                        ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		String bcontent = ScanUtil.nextLine();
-
 		// 4 조인문을 이용하여 관리자 이름을 출력한다.
 		// 5작성일 자동입력
 		// 6관리자계정 컨트롤에서 따옴
@@ -888,7 +898,13 @@ public class libBoardDao {
 			ps = con.prepareStatement(inputb);
 			int result = ps.executeUpdate();
 			if (0 < result) {
-				System.out.println("공지글 등록이 완료되었습니다.");
+				System.out.println("  ");
+				System.out.println("__________________________________________ ");
+				System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+				System.out.println("[관리자]          공지글 등록  성공                  Ⅰ - Ⅳ      ");
+				System.out.println("------------------------------------------");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -914,13 +930,28 @@ public class libBoardDao {
 	// 공지글 수정 메소드 제목 날짜만 수정
 	public void modB(int modno) {
 		// 이전메소드에서 게시글 번호를 가져옴
-		System.out.println("1.제목\t2.내용\t0.이전화면이동");
-		System.out.println("수정할 항목 선택 입력>>>");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[관리자]           게시글 수정                         Ⅰ - Ⅲ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 1.제목수정       2.내용수정                     0.이전화면  ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		int mmodno = ScanUtil.nextInt();
 		if (mmodno == 0) {
 			return;
 		} else {
-			System.out.println("변경 값 입력>>>");
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[관리자]           게시글 수정                        Ⅰ - Ⅳ      ");
+			System.out.println("------------------------------------------");
+			System.out.println("■ 변경된 정보를 입력해주세요                                        ■");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+			System.out.println("입력창 >");
 		}
 		// !!!!!!!!!!!!!!!!!!!
 		String mvalue = ScanUtil.nextLine();
@@ -939,7 +970,14 @@ public class libBoardDao {
 		case 0: // 이전화면이동
 			break;
 		default:
-			System.out.println("잘못된 공지항목 선택 입력입니다.");
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[관리자]        게시글 수정 오류                        Ⅰ - Ⅳ      ");
+			System.out.println("------------------------------------------");
+			System.out.println("■             잘못된 입력입니다                             ■");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 			break;
 		}
 
@@ -957,7 +995,15 @@ public class libBoardDao {
 			int result = ps.executeUpdate();
 
 			if (0 < result) {
-				System.out.println("[" + ssname + "]의 내용이 [" + mvalue + "]로 바뀌었습니다.");
+				System.out.println("  ");
+				System.out.println("___________________________________________________ ");
+				System.out.println("■                xx 도서관 도서관리 프로그램            —  ▢  X ■ ");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+				System.out.println("[관리자]              게시글 수정 성공                              Ⅰ - Ⅳ      ");
+				System.out.println("---------------------------------------------------");
+				System.out.println("[" + ssname + "]의 내용이 [" + mvalue + "]로 바뀌었습니다");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+				
 			}
 
 		} catch (SQLException e) {
@@ -990,7 +1036,14 @@ public class libBoardDao {
 
 			int result = ps.executeUpdate();
 			if (result > 0) {
-				System.out.println("!!!선택한 공지글이 삭제 되었습니다.");
+				System.out.println("  ");
+				System.out.println("__________________________________________ ");
+				System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+				System.out.println("[관리자]          삭제 성공                             Ⅰ - Ⅳ      ");
+				System.out.println("------------------------------------------");
+				System.out.println("■ 선택한 공지글이 삭제 되었습니다                                 ■");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 			}
 
 		} catch (SQLException e) {
@@ -1017,7 +1070,15 @@ public class libBoardDao {
 	}
 
 	public void deleteUser() {
-		System.out.println("삭제 하시겠습니까? Y/N >>>");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[관리자]            삭제확인                          Ⅰ - Ⅳ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 삭제 하시겠습니까?   Y / N                 ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		String dcheck = ScanUtil.nextLine();
 		// 삭제 확인 Y인 경우 트라이캐치 시행되어 삭제가됨
 		if (dcheck.equals("y") || dcheck.equals("Y")) {
@@ -1034,7 +1095,14 @@ public class libBoardDao {
 				int result = ps.executeUpdate();
 
 				if (result > 0) {
-					System.out.println(usernoselect + "의 회원 삭제가 완료되었습니다.");
+					System.out.println("  ");
+					System.out.println("__________________________________________ ");
+					System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+					System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+					System.out.println("[관리자]            삭제성공                          Ⅰ - Ⅳ      ");
+					System.out.println("------------------------------------------");
+					System.out.println("■"+usernoselect + "의 회원 삭제 "+"          ■");
+					System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -1058,16 +1126,30 @@ public class libBoardDao {
 			}
 
 		} else {
-			System.out.println("잘못된 입력, 삭제 되지 않았습니다.");
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[관리자]            삭제취소                          Ⅰ - Ⅴ      ");
+			System.out.println("------------------------------------------");
+			System.out.println("■ 삭제가 취소되었습니다                                               ■");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 		}
 	}
 
 //책대여
 	public void rentbookchkid() {
-		System.out.println("===도서대여");
 
 		// 회원번호가 있는지 없는지 유무확인
-		System.out.println("1.회원번호를 입력해주세요");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[관리자]          도서 대여                               Ⅰ - Ⅱ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 대여하는 회원번호를 입력해주세요                               ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		String userno = ScanUtil.nextLine();
 		String password = null;
 
@@ -1075,7 +1157,14 @@ public class libBoardDao {
 		Map<String, Object> user = libuserDao.selectUser(userno, password);
 
 		if (user == null) {
-			System.out.println("!!!등록된 해당 회원번호는 없습니다.");
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[관리자]           도서대여 실패                      Ⅰ - Ⅲ      ");
+			System.out.println("------------------------------------------");
+			System.err.println("          🙅‍♂️ 존재하지 않는 회원번호입니다 🙅‍♂️                    ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 		} else {
 			rentbookchkbook(userno);
 		}
@@ -1083,17 +1172,32 @@ public class libBoardDao {
 
 	// 도서번호 입력 및 도서번호가 있는지 확인후 대여 메소드
 	public void rentbookchkbook(String userno) {
-		System.out.println("2.도서번호를 입력해주세요");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[관리자]          도서 대여                               Ⅰ - Ⅱ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 대여하는 도서번호를 입력해주세요                               ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
 		String rentisbnno = ScanUtil.nextLine();
 		String password = null;
 		// 도서테이블에 도서정보가 있는지 확인
 		Map<String, Object> book = libuserDao.selectUserbook(rentisbnno, password);
 		if (book == null) {
-			System.out.println("!!!등록된 해당 도서는 없습니다.");
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[관리자]           도서대여 실패                      Ⅰ - Ⅲ      ");
+			System.out.println("------------------------------------------");
+			System.err.println("          🙅‍♂️ 존재하지 않는 도서번호입니다 🙅‍♂️                    ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 			return;
 		} else {
 
-			System.out.println("===대여정보 전송");
+//			System.out.println("===대여정보 전송");
 			//sql 인서트
 			try {
 				password = "java";
@@ -1104,7 +1208,13 @@ public class libBoardDao {
 				int insertrentresult = ps.executeUpdate();
 
 				if (0 < insertrentresult) {
-					System.out.println("신청글 등록 되었습니다.");
+					System.out.println("  ");
+					System.out.println("__________________________________________ ");
+					System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+					System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+					System.out.println("[관리자]          도서 대여 성공                       Ⅰ - Ⅲ      ");
+					System.out.println("------------------------------------------");
+					System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
