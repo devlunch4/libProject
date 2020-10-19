@@ -27,17 +27,8 @@ public class View {
 	public static final int ADMINLOGIN = 8;
 	//로그인후 메뉴
 	public static final int ADMINMENU = 9;
-	
 	//
-	public static final int BOARD_LIST = 9;
+
 	
-	
-	
-	
-	
-	//
-	public static final int BOARD_VIEW = 10;
-	//
-	public static final int BOARD_INSERT_FORM = 11;
 
 }

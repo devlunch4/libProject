@@ -19,7 +19,7 @@ public class libBoardService {
 	// 기본 접속자 정보 변수 값 설정
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String user = "hr";
-	String password = "java";
+	String password = "oracle";
 
 	Connection con = null;
 	PreparedStatement ps = null;
@@ -152,7 +152,7 @@ public class libBoardService {
 			ps = con.prepareStatement(rentchksql);
 			rs = ps.executeQuery();
 			System.out
-					.println("회원번호\t\t내역번호\tISBN번호\t\t제목(5글자까지)\t\t반납예상일\t\td연장가능여부");
+					.println("회원번호\t\t내역번호\tISBN번호\t\t제목(5글자까지)\t\t반납예상일\t\t연장가능여부");
 			System.out
 					.println("----------------------------------------------------------------------------------------");
 			while (rs.next()) {
@@ -188,7 +188,7 @@ public class libBoardService {
 	// 현재 입고된 도서의 수량과 전체 도서중 최근 입력된 도서 일부분만 출력 JDBC2
 	public void selectbookinfo() {
 		// 전체 도서 수량을 출력.
-		String allbinfosql = "SELECT * FROM libbookinfo";
+		String allbinfosql = "SELECT * FROM libbookinfo ORDER BY bookno";
 
 		try {
 			con = DriverManager.getConnection(url, user, password);
@@ -208,7 +208,7 @@ public class libBoardService {
 					.println("[관리자]            도서조회                           Ⅰ - Ⅲ      ");
 			System.out.println("------------------------------------------");
 			System.out.println("■ 저장된 도서 정보 수 : " + bcount + "권\t\t\t  " + "■");
-			System.out.println("■ 조회할 년도 'YYYY'형식으로 입력해주세요                  ■");
+			System.out.println("■ 도서등록 년도 'YYYY'형식으로 입력해주세요                  ■");
 			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 			System.out.println("입력창 >");
 
@@ -244,14 +244,14 @@ public class libBoardService {
 				.println("[관리자]            도서조회                           Ⅰ - Ⅲ      ");
 		System.out.println("------------------------------------------");
 		System.out
-				.println("■조회할 월 'MM'형식으로 입력해주세요                           ■");
+				.println("■도서등록 월 'MM'형식으로 입력해주세요                           ■");
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 		System.out.println("입력창 >");
 		String minput = ScanUtil.nextLine();
 
 		String monthsql = "SELECT bookno, title, author, publisher, TO_CHAR(pdate,'YYYYMMDD') pdate, "
 				+ "rentyesno, addbkdate FROM libbookinfo WHERE TO_CHAR(addbkdate,'YYYYMM') = "
-				+ "'" + yinput + minput + "' ORDER BY pdate";
+				+ "'" + yinput + minput + "' ORDER BY addbkdate";
 
 		int mcount = 0;
 
@@ -406,7 +406,7 @@ public class libBoardService {
 					+ "DECODE(h.extencan,0,'연장가능',1,'연장불가') extencan "
 					+ "FROM libuser u, libhistory h "
 					+ "WHERE u.userno = h.userno(+) AND u.uname = '"
-					+ usernminput + "'";
+					+ usernminput + "' ORDER BY u.userno";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			System.out.println("  ");
@@ -468,7 +468,7 @@ public class libBoardService {
 					+ " DECODE(h.extencan, 1, '연장가능', 0, '연장불가') extencan"
 					+ " FROM libuser u, libhistory h"
 					+ " WHERE u.userno = h.userno (+) AND u.uphone = '"
-					+ userphinput + "'";
+					+ userphinput + "' ORDER BY u.userno";
 
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();

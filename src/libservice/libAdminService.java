@@ -250,7 +250,7 @@ public class libAdminService {
 	private void deluserno() {
 //		System.out.println("===회원정보 삭제");
 //		System.out.println("삭제할 회원번호 입력해주세요>>>");
-		System.out.println("  ");
+		System.out.println("");
 		System.out.println("__________________________________________ ");
 		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
@@ -267,6 +267,7 @@ public class libAdminService {
 		Map<String, Object> user = libuserDao
 				.selectUser(usernoselect, password);
 		libController.Loginuserno = user;
+		
 		if (user == null) {
 //			System.out.println("!!!없는 회원번호 입니다.");
 			System.out.println("  ");
@@ -296,11 +297,16 @@ public class libAdminService {
 		// $$$$
 		String usernoselect = ScanUtil.nextLine();
 		// 수정할 회원번호 정보 출력 -회원정보 입력받아 넘김
+		
 		// 로그인 회원정보 호출 리셋 재설정
 		String password = null;
 		Map<String, Object> user = libuserDao
 				.selectUser(usernoselect, password);
+		
+		
+		
 		libController.Loginuserno = user;
+		
 		if (user == null) {
 			System.out.println("!!!없는 회원번호 입니다.");
 		} else {
@@ -413,24 +419,13 @@ public class libAdminService {
 
 		switch (inputctrl) {
 		case 1:// 도서 등록
-//			System.out.println("  ");
-//			System.out.println("__________________________________________ ");
-//			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
-//			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
-//			System.out.println("[관리자]            도서 등록                          Ⅰ - Ⅲ   ");
-//			System.out.println("------------------------------------------");
-//			System.out.println("■ 도서등록을 시작합니다.                                  ■");
-//			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-//			System.out.println("입력창 >");
-//			System.out.println("===도서등록을 시작합니다.안내 순서에 따라 값을 입력해주세요");
-//			System.out.println("===등록을 시작합니다.");
 			// 등록 인풋을 통한 입력 및 입력 완료 확인.
 			// 도서 추가 메소드 및 insert.
 			libboardDao.addbook();
 
 //			System.out.println("1.등록\t2.수정\t3.삭제\t4대출확인\t5.도서조회\t0.이전화면이동");
 //			System.out.println("해당 항목 선택 입력>>>");
-			return bookCtrl();
+			break;
 		case 2:// 도서 수정
 				// 수정할 책의 isbn을 받아 정보 조회후 해당값을 수정한다.
 			System.out.println("  ");
@@ -450,15 +445,15 @@ public class libAdminService {
 			//
 			// 도서정보 수정 메소드 시작 update
 			libboardDao.udtfindbAdmin(modbookid);
-			return bookCtrl();
+			break;
 		case 3:// 도서 삭제
 			System.err.println("!!!도서 삭제는 과거 대여내역 정보가 없는 도서만 삭제가 가능합니다.");
 			libboardDao.deletebook();
 
-			return bookCtrl();
+			break;
 		case 4:// 대출 확인
 			libboardService.rentbookchk();
-			return bookCtrl();
+			break;
 		case 5:// 도서 조회
 				// 도서 총 갯수 출력
 			libboardService.selectbookinfo();

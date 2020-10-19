@@ -27,9 +27,10 @@ public class libUserService {
 		return instance;
 	}
 
-	// 회원로그인 호출시 입력 및 회원 메뉴 진입을 위한 메소드
+	// 회원 로그인 호출시 실행 메소드
 	public int userlogin() {
-		System.out.println("  ");
+		// 회원 로그인 첫 화면
+		System.out.println("");
 		System.out.println("__________________________________________ ");
 		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
@@ -38,19 +39,23 @@ public class libUserService {
 		System.out.println("■          회원번호 10자리를 입력해주세요               ■");
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 		System.out.println("입력창 >");
+
+		// 회원 번호 입력
 		String userno = ScanUtil.nextLine();
+		// 회원은 비밀번호 없음
 		String password = null;
 
-		// 회원테이블과 비교하여 테이블에 해당 정보 존재시 회원 로그인 완료
+		// 회원 테이블의 값 유무 확인을 위한 변수 설정 및 값 지정
 		Map<String, Object> user = libuserDao.selectUser(userno, password);
 
+		// 회원 번호 값이 없는 경우 안내창 및 값이 있는경우 로그인 성공 및 유저정보 저장
 		if (user == null) {
 			System.out.println("__________________________________________ ");
 			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
 			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
 			System.err.println("      \t   🙅‍♂️  존재하지 않는 회원번호입니다   🙅‍♂️");
 			System.out.println("\t 회원로그인 실패로 첫화면으로 이동합니다.");
-			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"); 
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 			System.out.println("");
 			System.out.println("");
 			// 아래 return View.USERMENU; 실행되도록함
@@ -61,18 +66,18 @@ public class libUserService {
 			libController.Loginuserno = user;
 
 			// 회원로그인 완료가 된다면 아래 수행
-			//System.out.println("회원로그인 아이디 확인" + libController.Loginuserno);
+			// System.out.println("회원로그인 아이디 확인" + libController.Loginuserno);
 
-			// 회원로그인 완료후 항목 선택 메뉴가 나오도록함 userA 메소드 호출
+			// 회원로그인 완료후 항목 회원 메인 메뉴 호출
 			return View.USERMENU;
 		}
-		
+
 		return View.HOME;
 	}
 
-	// 회원로그인후 회원전용메뉴 진입
+	// 회원로그인후 회원전용 메인 메뉴 진입
 	public int userMenu() {
-		System.out.println("  ");
+		System.out.println("");
 		System.out.println("__________________________________________ ");
 		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
@@ -82,15 +87,26 @@ public class libUserService {
 		System.out.println("■ 3.공지글 조회            0.로그아웃                              ■");
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 		System.out.println("입력창 >");
-		int input = ScanUtil.nextInt();
 
-		switch (input) {
-		case 1: // 1.도서검색 $ 완료
+		int inputx;
+		try {
+			String input = ScanUtil.nextLine();
+			inputx = Integer.parseInt(input);
+		} catch (NumberFormatException e) {
+			System.err.println("      \t    🙅‍♂️  올바르지 않는 입력값입니다   🙅‍♂️");
+			return View.HOME;
+		} catch (Exception e) {
+			System.err.println("      \t    🙅‍♂️  올바르지 않는 입력값입니다   🙅‍♂️");
+			return View.HOME;
+		}
+
+		switch (inputx) {
+		case 1: // 1.도서검색
 			// 도서테이블 활용하여 도서검색 시작
 			userBookSearch();
 			return View.USERMENU;
-			
-			// break;
+
+		// break;
 
 		case 2: // 2.회원정보수정
 			System.out.println("2번 회원정보수정및대여연장을 선택했습니다");
@@ -110,7 +126,7 @@ public class libUserService {
 			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
 			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
 			System.out.println("■ 로그인화면으로 돌아갑니다                                         ■ ");
-			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"); 
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 			return View.HOME;
 		default:
 			System.out.println("  ");
@@ -118,7 +134,7 @@ public class libUserService {
 			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
 			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
 			System.err.println("          🙅‍♂️  잘못된 입력, 회원 메인메뉴를 확인해주세요   🙅‍♂️          ");
-			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"); 
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 			break;
 		}
 		return View.USERMENU;
@@ -140,7 +156,7 @@ public class libUserService {
 	}
 
 	// 회원 로그인후 2번 입력 후 이동된 회원정보수정및도서연장 메인 메소드1
-	
+
 	public int userEdit() {
 		System.out.println("  ");
 		System.out.println("__________________________________________ ");
@@ -167,11 +183,11 @@ public class libUserService {
 			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
 			System.out.println("[회원전용]           수정완료                          Ⅰ - Ⅴ      ");
 			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-			
+
 			// 출력할 컬럼값 선택후 변경
-			
+
 			return userEdit();
-			
+
 		case 2: // 도서연장
 			// 내가 대출중인 도서 출력
 			libboardDao.userrent();
@@ -192,11 +208,12 @@ public class libUserService {
 		}
 
 		return View.USEREDIT;
-		
+
 	}
 
 	// 회원 로그인후 메인메뉴 1번 도서검색 메뉴
 	public int userBookSearch() {
+		// 도서검색 화면 안내 및 선택창
 		System.out.println("  ");
 		System.out.println("__________________________________________ ");
 		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
@@ -206,17 +223,26 @@ public class libUserService {
 		System.out.println("■ 1.도서조회      2.도서신청                       0.이전화면 ■");
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 		System.out.println("입력창 >");
+		int input2;
+		try {
+			String input = ScanUtil.nextLine();
+			input2 = Integer.parseInt(input);
+		} catch (NumberFormatException e) {
+			System.err.println("      \t    🙅‍♂️  올바르지 않는 입력값입니다   🙅‍♂️");
+			return View.USERBOOKSEARCH;
+		} catch (Exception e) {
+			System.err.println("      \t    🙅‍♂️  올바르지 않는 입력값입니다   🙅‍♂️");
+			return View.USERBOOKSEARCH;
+		}
 
-		int input = ScanUtil.nextInt();
-
-		switch (input) {
+		switch (input2) {
 		case 1:
-			//System.out.println("===도서조회메뉴");
+			// 도서 조회 메소드 호출
 			libboardDao.bookboardsearch();
 			return View.USERBOOKSEARCH;
 		case 2:
 			// 도서신청 게시판에 글입력
-			//System.out.println("===도서신청메뉴");
+			// System.out.println("===도서신청메뉴");
 			// 신청된 도서리스트 보여주기
 			libboardService.applyBoardShow();
 			// 도서 신청글 등록 완료.
@@ -230,7 +256,7 @@ public class libUserService {
 			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
 			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
 			System.err.println("            🙅‍♂️  잘못된 입력, 도서검색 메뉴 재출력합니다   🙅‍♂️          ");
-			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"); 
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 			break;
 		}
 		// 상위메뉴 이동 1도서검색
