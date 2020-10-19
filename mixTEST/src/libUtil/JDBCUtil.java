@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class JDBCUtil {
-
+	
 	// 접속자
 	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	private String user = "hr";
@@ -340,7 +340,7 @@ public class JDBCUtil {
 	// 추가분
 	public int historyupdate(String sql) {
 		int result = 0;
-
+		
 		try {
 			con = DriverManager.getConnection(url, user, password);
 

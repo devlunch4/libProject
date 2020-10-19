@@ -55,7 +55,7 @@ public class libUserService {
 			libController.Loginuserno = user;
 
 			// 회원로그인 완료가 된다면 아래 수행
-			//System.out.println("회원로그인 아이디 확인" + libController.Loginuserno);
+//			System.out.println("회원로그인 아이디 확인");
 
 			// 회원로그인 완료후 항목 선택 메뉴가 나오도록함 userA 메소드 호출
 			return View.USERMENU;
@@ -80,21 +80,20 @@ public class libUserService {
 
 		switch (input) {
 		case 1: // 1.도서검색 $ 완료
-			System.out.println("1번 도서검색을 선택했습니다");
+//			System.out.println("1번 도서검색을 선택했습니다");
 			// 도서테이블 활용하여 도서검색 시작
 			userBookSearch();
-			return View.USERMENU;
-			
+			return View.USERBOOKSEARCH;
 			// break;
 
 		case 2: // 2.회원정보수정
-			System.out.println("2번 회원정보수정및대여연장을 선택했습니다");
+//			System.out.println("2번 회원정보수정및대여연장을 선택했습니다");
 			userEdit();
 			// return View.USEREDIT;
 			break;
 
 		case 3: // 3.공지글조회
-			System.out.println("3번 공지글조회을 선택했습니다");
+//			System.out.println("3번 공지글조회을 선택했습니다");
 			userReadBoard();
 			// return View.USERSELECTA;
 			break;
@@ -122,10 +121,10 @@ public class libUserService {
 		libboardService.readNBCon();
 
 		return View.USERREADBOARD;
+
 	}
 
-	// 회원 로그인후 2번 입력 후 이동된 회원정보수정및도서연장 메인 메소드1
-	
+	// 회원 로그인후 2번 입력 후 이동된 회원정보수정및도서연장 메인 메소드
 	public int userEdit() {
 		System.out.println("  ");
 		System.out.println("__________________________________________ ");
@@ -136,7 +135,6 @@ public class libUserService {
 		System.out.println("■ 1.내 정보수정       2.대여일 연장            0.이전메뉴   ■");
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 		System.out.println("입력창 >");
-
 		int edinput = ScanUtil.nextInt();
 		switch (edinput) {
 		case 1:// 정보수정
@@ -152,15 +150,13 @@ public class libUserService {
 			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
 			System.out.println("[회원전용]           수정완료                          Ⅰ - Ⅴ      ");
 			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-			
+
 			// 출력할 컬럼값 선택후 변경
-			
-			return userEdit();
-			
+
+			break;
 		case 2: // 도서연장
 			// 내가 대출중인 도서 출력
 			libboardDao.userrent();
-
 			// 위 메소드 내부에 아래 메소드 추가
 			// 도서 반납기간 연장 메소드는 libboardDao.userrent() >>> libuserDao 클래스에 있음
 			// libuserDao.userbookext();
@@ -177,7 +173,7 @@ public class libUserService {
 		}
 
 		return View.USEREDIT;
-		
+
 	}
 
 	// 회원 로그인후 메인메뉴 1번 도서검색 메뉴
@@ -196,12 +192,11 @@ public class libUserService {
 
 		switch (input) {
 		case 1:
-			//System.out.println("===도서조회메뉴");
 			libboardDao.bookboardsearch();
 			return View.USERBOOKSEARCH;
 		case 2:
 			// 도서신청 게시판에 글입력
-			//System.out.println("===도서신청메뉴");
+//			System.out.println("===도서신청메뉴");
 			// 신청된 도서리스트 보여주기
 			libboardService.applyBoardShow();
 			// 도서 신청글 등록 완료.
@@ -218,4 +213,11 @@ public class libUserService {
 		return View.USERBOOKSEARCH;
 	}
 
+
+	
+	
+	
+	
+	
+	
 }
