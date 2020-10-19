@@ -131,12 +131,11 @@ public class libUserService {
 		case 2: // 도서연장
 			// 내가 대출중인 도서 출력
 			libboardDao.userrent();
-			
 			// 위 메소드 내부에 아래 메소드 추가
 			// 도서 반납기간 연장 메소드는 libboardDao.userrent() >>> libuserDao 클래스에 있음
 			// libuserDao.userbookext();
 
-			return userEdit();
+			break;
 		case 0:
 			System.out.println("이전메뉴로 이동합니다");
 
@@ -172,9 +171,10 @@ public class libUserService {
 			// 도서 신청글 등록 완료.
 			break;
 		case 0:
-			// 이전화면 이동 
+			// 이전화면 이동
 			System.out.println("이전화면으로 이동합니다");
-			return View.USERMENU;
+		
+		return View.USERMENU;
 		default:
 			System.out.println("잘못된 입력, 도서검색 메뉴 재출력합니다.");
 			break;

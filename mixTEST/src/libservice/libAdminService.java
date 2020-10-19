@@ -275,9 +275,9 @@ public class libAdminService {
 			// 도서 추가 메소드 및 insert.
 			libboardDao.addbook();
 
-			System.out.println("1.등록\t2.수정\t3.삭제\t4대출확인\t5.도서조회\t0.이전화면이동");
-			System.out.println("해당 항목 선택 입력>>>");
-			break;
+//			System.out.println("1.등록\t2.수정\t3.삭제\t4대출확인\t5.도서조회\t0.이전화면이동");
+//			System.out.println("해당 항목 선택 입력>>>");
+			return bookCtrl();
 		case 2:// 도서 수정
 				// 수정할 책의 isbn을 받아 정보 조회후 해당값을 수정한다.
 			System.out.println("===도서수정을 시작합니다.");
@@ -290,26 +290,27 @@ public class libAdminService {
 			//
 			// 도서정보 수정 메소드 시작 update
 			libboardDao.udtfindbAdmin(modbookid);
-			break;
+			return bookCtrl();
 		case 3:// 도서 삭제
 			System.err.println("!!!도서 삭제는 과거 대여내역 정보가 없는 도서만 삭제가 가능합니다.");
 			libboardDao.deletebook();
 
-			break;
+			return bookCtrl();
 		case 4:// 대출 확인
 			libboardService.rentbookchk();
-			break;
-		case 5:// 도서 조회
+			return bookCtrl();
+			case 5:// 도서 조회
 				// 도서 총 갯수 출력
 			libboardService.selectbookinfo();
 			// 도서 해당월 검색 조회 출력
 			libboardService.selectmonthinput();
-			break;
+			return bookCtrl();
 		case 0:
 			break;
 
 		default:
-			break;
+			System.out.println("잘못된 입력입니다.");
+			return bookCtrl();
 		}
 
 		return View.ADMINMENU;

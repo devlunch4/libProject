@@ -143,8 +143,6 @@ public class libBoardDao {
 				} catch (Exception e) {
 				}
 		}
-		
-		return ;
 	}
 
 	// 도서신청게시판 데이터 가져오기/내보내기 사용 불가 ???
@@ -405,15 +403,72 @@ public class libBoardDao {
 		}
 		// 도서연장 물어보기
 		System.out.println("===");
-		System.out.println("1.도서연장 \t0.이전화면 돌아가기");
+		System.out.println("1.도서연장\t 0.이전화면 돌아가기");
 		int extinput = ScanUtil.nextInt();
 		switch (extinput) {
 		case 1:
 			// 도서 반납기간 연장 메소드 호출
 			libuserDao.userbookext();
+			// sql 도서 연장 완료후 확인 조회 창 출력
+			try {
+				// 로그인 회원의 정보
+				Object loginuser = libController.Loginuserno.get("USERNO");
+
+				// 로그인 회원의 대여정보 추출 쿼리
+				// 내역번호,제목,저자,출판사,대여일,반납예정일,연장가능유무
+				String sql = "SELECT a.historyno, b.title, b.publisher, a.rentdate, a.expectdate, a.extencan FROM libhistory a JOIN libbookinfo b ON a.bookno = b.bookno WHERE a.userno = "
+						+ "'" + loginuser + "'";
+
+				// 위의 검색 항목에 따른 검색 값에 따른 sql쿼리문 작성 후 조회 출력
+				con = DriverManager.getConnection(url, user, password);
+				ps = con.prepareStatement(sql);
+				rs = ps.executeQuery();
+				System.out.print("대여내역번호\t제목\t\t출판사\t\t대여일\t\t반납예정일\t\t연장가능유무");
+				System.out.println("");
+				System.out.println("------------------------------------------------------------------------------------");
+
+				while (rs.next()) {
+
+					int extno = rs.getInt("extencan");
+					String extstr = null;
+					if (extno == 1) {
+						extstr = "연장가능";
+					} else if (extno == 0) {
+						extstr = "연장불가";
+					}
+
+					System.out.print(rs.getString("historyno"));
+					System.out.print("\t\t" + rs.getString("title"));
+					System.out.print("\t\t" + rs.getString("publisher"));
+					System.out.print("\t\t" + rs.getDate("rentdate"));
+					System.out.print("\t" + rs.getDate("expectdate"));
+					System.out.println("\t" + extstr);
+
+					// System.out.println("");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				if (rs != null)
+					try {
+						rs.close();
+					} catch (Exception e) {
+					}
+				if (ps != null)
+					try {
+						ps.close();
+					} catch (Exception e) {
+					}
+				if (con != null)
+					try {
+						con.close();
+					} catch (Exception e) {}
+			}
+			//case1의 브레이크
 			break;
 
 		case 0:
+			
 			System.out.println("정보수정 메인 화면으로 돌아갑니다.");
 			break;
 		default:
@@ -944,12 +999,13 @@ public class libBoardDao {
 				con = DriverManager.getConnection(url, user, password);
 				String sql = "INSERT INTO libhistory VALUES((select nvl(max(historyno), 0) + 1 FROM libhistory), '"
 						+ userno + "', '" + rentisbnno + "', SYSDATE, null, SYSDATE+10,1)";
+						//+ " WHERE (SELECT RENTYESNO FROM libbookinfo WHERE bookno = '" + rentisbnno+"') = 0";
 				ps = con.prepareStatement(sql);
 				int insertrentresult = ps.executeUpdate();
 
 				if (0 < insertrentresult) {
-					System.out.println("신청글 등록 되었습니다.");
-				}
+					System.out.println("대여가 완료 되었습니다.");
+				} else {System.out.println("대여되지 않았습니다.");}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {

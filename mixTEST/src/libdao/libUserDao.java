@@ -134,7 +134,7 @@ public class libUserDao {
 		System.out.println("도서연장할 도서 대여번호 입력>>");
 		int historyinput = ScanUtil.nextInt();
 		Object userno = libController.Loginuserno.get("USERNO");
-		// 연장 가능 여부 확인후 연장가능여부값 변경 및 반납예정일 10일 증가 
+		// 연장 가능 여부 확인후 연장가능여부값 변경 및 반납예정일 10일 증가
 		String historysql = "UPDATE libhistory SET extencan = 1, expectdate = (SELECT expectdate FROM libhistory WHERE historyno = "
 				+ "'" + historyinput + "') + 10 " + "WHERE historyno = " + "'" + historyinput + "' AND userno = " + "'"
 				+ userno + "' AND extencan = 0";
