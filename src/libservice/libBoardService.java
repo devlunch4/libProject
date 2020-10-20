@@ -19,7 +19,7 @@ public class libBoardService {
 	// 기본 접속자 정보 변수 값 설정
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String user = "hr";
-	String password = "oracle";
+	String password = "java";
 
 	Connection con = null;
 	PreparedStatement ps = null;

@@ -24,7 +24,7 @@ public class libAdminDao {
 		return instance;
 	}
 
-	// oracle
+
 	// 관리자계졍 관련
 	// 관리자계졍 관련
 	// 관리자계졍 관련

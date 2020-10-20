@@ -18,7 +18,7 @@ public class libBoardDao {
 	// 기본 접속자 정보 변수 값 설정
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String user = "hr";
-	String password = "oracle";
+	String password = "java";
 	// oracle
 	Connection con = null;
 	PreparedStatement ps = null;
@@ -1358,7 +1358,7 @@ public class libBoardDao {
 
 			try {
 				//대여내역 테이블에 로그 입력
-				password = "oracle";
+				password = "java";
 				con = DriverManager.getConnection(url, user, password);
 				String sql = "INSERT INTO libhistory VALUES((select nvl(max(historyno), 0) + 1 FROM libhistory), '"
 						+ userno + "', '" + rentisbnno + "', SYSDATE, null, SYSDATE+10, 1)";
@@ -1424,7 +1424,7 @@ public class libBoardDao {
 			// sql 인서트 대여를 완료를 위한 반납일 값 설정 과 대여여부 값 초기화(0)
 
 			try {
-				password = "oracle";
+				password = "java";
 				con = DriverManager.getConnection(url, user, password);
 				// 반납이 실행되고 대여테이블 반납일에 입력 및 !!! 도서정보테이블에 대여여부 값 0으로 변경
 				String returnsetsql = "UPDATE libhistory SET returndate = SYSDATE WHERE bookno = '" + inbookisbn + "'";
