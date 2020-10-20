@@ -13,7 +13,7 @@ public class libAdminDao {
 
 	private libAdminDao() {
 	}
-	
+
 	// libUserDao 인스턴스 생성
 	private static libAdminDao instance;
 
