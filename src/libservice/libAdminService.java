@@ -48,7 +48,7 @@ public class libAdminService {
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
 		System.out.println("■                관리자 로그인                             ■");
 		System.out.println("■----------------------------------------■");
-		System.out.println("■          관리자 비밀번호를 입력해주세                   ■");
+		System.out.println("■          관리자 비밀번호를 입력해주세요                ■");
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 		System.out.println("입력창 >");
 		String adminpw = ScanUtil.nextLine();
@@ -118,11 +118,9 @@ public class libAdminService {
 			
 		case 0:
 			// 로그아웃
-			System.out.println("0번 로그아웃을 선택했습니다.로그인화면으로 돌아갑니다.");
 			return View.HOME;
 
 		default:
-			System.out.println("잘못된 입력, 관리자 메인메뉴를 확인해주세요");
 			break;
 		}
 		return View.ADMINMENU;
@@ -218,16 +216,30 @@ public class libAdminService {
 
 		case 2: // 전화번호 조회
 			// 번호가 있는지 없는지 유무확인
-			System.out.println("검색 전화번호를 입력해주세요>>>");
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[관리자]           회원번호 검색                      Ⅰ - Ⅳ      ");
+			System.out.println("------------------------------------------");
+			System.out.println("■ 검색 전화번호를 입력해주세요                                     ■");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+			System.out.println("입력창 >");
 			String userphinput = ScanUtil.nextLine();
 			String uname1 = userphinput;
 
 			Map<String, Object> userph = libuserDao.selectUserPn(userphinput);
 
 			if (userph == null) {
-				System.out.println("!!!등록된 해당 전화번호 없습니다.");
+				System.out.println("  ");
+				System.out.println("__________________________________________ ");
+				System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+				System.out.println("[관리자]       회원번호 검색 실패                        Ⅰ - Ⅴ      ");
+				System.out.println("------------------------------------------");
+				System.out.println("■ 등록된 해당 전화번호 없습니다.                 ■");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 			} else {
-				System.out.println("사용자가 있으니 출력");
 				libboardService.viewPserch(uname1);
 			}
 			break;
@@ -250,7 +262,7 @@ public class libAdminService {
 	private void deluserno() {
 //		System.out.println("===회원정보 삭제");
 //		System.out.println("삭제할 회원번호 입력해주세요>>>");
-		System.out.println("");
+		System.out.println("  ");
 		System.out.println("__________________________________________ ");
 		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
@@ -267,7 +279,6 @@ public class libAdminService {
 		Map<String, Object> user = libuserDao
 				.selectUser(usernoselect, password);
 		libController.Loginuserno = user;
-		
 		if (user == null) {
 //			System.out.println("!!!없는 회원번호 입니다.");
 			System.out.println("  ");
@@ -292,32 +303,50 @@ public class libAdminService {
 
 	// 회원정보 수정
 	private void moduserno() {
-		System.out.println("===회원정보 수정");
-		System.out.println("수정할 회원번호 입력해주세요>>>");
+		System.out.println("  ");
+		System.out.println("__________________________________________ ");
+		System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+		System.out.println("[관리자]           회원정보 수정                      Ⅰ - Ⅲ      ");
+		System.out.println("------------------------------------------");
+		System.out.println("■ 1.수정할 회원번호 입력해주세요                                ■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("입력창 >");
+		 
 		// $$$$
 		String usernoselect = ScanUtil.nextLine();
 		// 수정할 회원번호 정보 출력 -회원정보 입력받아 넘김
-		
 		// 로그인 회원정보 호출 리셋 재설정
 		String password = null;
 		Map<String, Object> user = libuserDao
 				.selectUser(usernoselect, password);
-		
-		
-		
 		libController.Loginuserno = user;
-		
 		if (user == null) {
-			System.out.println("!!!없는 회원번호 입니다.");
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[관리자]           등록회원 삭제 실패              Ⅰ - Ⅳ      ");
+			System.out.println("------------------------------------------");
+			System.err.println("               🙅‍♂️ 존재하지 않는 회원번호입니다 🙅‍♂️                    ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 		} else {
 			// 입력된 회원정보 출력
 			System.out.println("---------------------------------");
 			libboardDao.userInfo();
 			System.out.println("---------------------------------");
 			// 수정할 회원 항목 확인 및 수정 메소드 호출
-			System.out.println("===수정을 시작합니다");
+			 
 			libuserDao.userModifyAdmin();
+			System.out.println("  ");
+			System.out.println("__________________________________________ ");
+			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
+			System.out.println("[관리자]              수정성공                      Ⅰ - Ⅳ      ");
+			System.out.println("------------------------------------------");
 			System.out.println(usernoselect + ": 수정이 완료되었습니다.");
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+			
 			// 변경됭 회원정보 출력
 			libboardDao.userInfo();
 		}
@@ -419,6 +448,7 @@ public class libAdminService {
 
 		switch (inputctrl) {
 		case 1:// 도서 등록
+
 			// 등록 인풋을 통한 입력 및 입력 완료 확인.
 			// 도서 추가 메소드 및 insert.
 			libboardDao.addbook();
@@ -432,18 +462,22 @@ public class libAdminService {
 			System.out.println("__________________________________________ ");
 			System.out.println("■         xx 도서관 도서관리 프로그램        —  ▢  X ■ ");
 			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ");
-			System.out.println("[관리자]          공지글 수정                           Ⅰ - Ⅲ      ");
+			System.out.println("[관리자]            도서 수정                          Ⅰ - Ⅲ      ");
 			System.out.println("------------------------------------------");
 			System.out.println("■ 수정할 도서번호를 입력해주세요                                  ■");
 			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 			System.out.println("입력창 >");
 			String modbookid = ScanUtil.nextLine();
 
+			
 			// 입력한 isbn 번호로 테이블내 정보 조회 및 출력
 			libboardDao.findbAdmin(modbookid);
+			
+			
 			// 도서정보 출력완료
 			//
 			// 도서정보 수정 메소드 시작 update
+			
 			libboardDao.udtfindbAdmin(modbookid);
 			break;
 		case 3:// 도서 삭제
@@ -472,11 +506,9 @@ public class libAdminService {
 
 	// 2- 공지글관리 진입
 	public void noticectrl() {
-		System.out.println("===공지글관리");
 		// 공지글 출력 메소드 호출
 		libboardService.selectnotice();
 		// 공지글 등록수정삭제 공지글 관리 안내
-		System.out.println("1등록\t2.수정\t3.삭제\t0.이전메뉴 돌아가기");
 		int editin = ScanUtil.nextInt();
 		switch (editin) {
 		case 1:// 공지글 등록

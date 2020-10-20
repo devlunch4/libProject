@@ -27,8 +27,7 @@ public class View {
 	public static final int ADMINLOGIN = 8;
 	//로그인후 메뉴
 	public static final int ADMINMENU = 9;
-	//
-
 	
-
+	//
+	
 }
